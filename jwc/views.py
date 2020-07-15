@@ -2,13 +2,13 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from jwc import models
 
-
 def login(request):
-    if request.method == 'GET':
+    if request.method == 'GET' :
         return render(request, 'login.html')
     else:
         number = request.POST.get('number')
         pswd = request.POST.get('pswd')
+        p = 1
         if number and pswd:
             user = models.user.objects.filter(number=number).filter(pswd=pswd)
             if user:
