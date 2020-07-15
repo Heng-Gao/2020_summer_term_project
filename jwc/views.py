@@ -8,7 +8,6 @@ def login(request):
     else:
         number = request.POST.get('number')
         pswd = request.POST.get('pswd')
-        p = 1
         if number and pswd:
             user = models.user.objects.filter(number=number).filter(pswd=pswd)
             if user:
