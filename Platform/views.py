@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
-from jwc import models
+from Platform import models
 
 def login(request):
     if request.method == 'GET' :

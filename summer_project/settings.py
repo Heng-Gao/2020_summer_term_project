@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jwc',
+    'Platform',
 ]
 
 MIDDLEWARE = [
@@ -123,7 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "jwc/templates/static"),
+    os.path.join(BASE_DIR, "Platform/templates/static"),
 )
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'  # 引擎

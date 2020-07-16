@@ -1,5 +1,5 @@
 from django.urls import path
-from jwc import views
+from Platform import views
 urlpatterns = [
     path('', views.index),
     path('index/', views.index),

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="db" uuid="a410c362-5c8f-4a4c-a833-934678e4080e">
+    <data-source source="LOCAL" name="db" uuid="bd946a1e-1931-45d4-8a9b-5d09ec3bee3c">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\HengGao\Desktop\数据库项目\db_project\db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:D:\Work\Web_projects_for_github\2020_summer_term_project\db.sqlite3</jdbc-url>
       <libraries>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.31.1/license.txt</url>

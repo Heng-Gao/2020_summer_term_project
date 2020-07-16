@@ -2,16 +2,87 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f2d716a-de86-4ef3-af7b-95a59c885984" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Platform/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a410c362-5c8f-4a4c-a833-934678e4080e.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0002_auto_20200312_1750.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0003_auto_20200313_2319.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0004_courseinfo_term.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0005_remove_courseinfo_course_number.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0006_auto_20200315_1208.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0007_opened_course.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0008_opened_course_teacher_number.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0009_auto_20200316_0808.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0010_auto_20200316_0815.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0011_auto_20200316_0821.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0012_auto_20200316_0845.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0013_delete_courseinfo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0014_courseinfo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0015_delete_courseinfo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0016_courseinfo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0017_delete_courseinfo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0018_courseinfo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0019_delete_courseinfo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/0020_courseinfo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/migrations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/course_delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/course_delete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/course_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/course_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/course_selection.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/course_selection.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/course_submit.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/course_submit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/index_manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/index_manager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/index_student.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/index_student.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/index_teacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/index_teacher.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/scores_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/scores_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/scores_submit.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/scores_submit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/images/banner.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/images/banner.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/images/manager.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/images/manager.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/images/student.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/images/student.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/images/teacher.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/images/teacher.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/jquery-3.3.1.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/jquery-3.3.1.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/bootstrap-datepicker.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/bootstrap-datepicker.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/bootstrap-notify.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/bootstrap-notify.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/chart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/dataTables.bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/dataTables.bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/dropzone.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/dropzone.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/fullcalendar.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/fullcalendar.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/jquery-ui.custom.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/jquery-ui.custom.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/jquery.dataTables.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/jquery.dataTables.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/jquery.vmap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/jquery.vmap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/jquery.vmap.sampledata.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/jquery.vmap.sampledata.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/jquery.vmap.world.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/jquery.vmap.world.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/moment.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/moment.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/pace.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/pace.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/select2.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/select2.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/plugins/sweetalert.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/plugins/sweetalert.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/static/js/popper.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/js/popper.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/student_scores.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/student_scores.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/student_timetable.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/student_timetable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/teacher_coursetable.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/teacher_coursetable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/term_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/term_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/user_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/user_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/templates/user_submit.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/user_submit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwc/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/summer_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/summer_project/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/summer_project/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/summer_project/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="db_project" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -35,6 +106,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -56,6 +128,8 @@
       <workItem from="1593307395742" duration="612000" />
       <workItem from="1594732409112" duration="1090000" />
       <workItem from="1594823233599" duration="315000" />
+      <workItem from="1594827667933" duration="1644000" />
+      <workItem from="1594905166238" duration="5756000" />
     </task>
     <task id="LOCAL-00001" summary="第二次修改">
       <created>1594823448823</created>
@@ -104,5 +178,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="752" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594821180230" />
+    <state x="381" y="268" key="git4idea.merge.GitPullDialog" timestamp="1594905191158">
+      <screen x="0" y="0" width="1440" height="960" />
+    </state>
+    <state x="381" y="268" key="git4idea.merge.GitPullDialog/0.0.1440.960@0.0.1440.960" timestamp="1594905191158" />
   </component>
 </project>
