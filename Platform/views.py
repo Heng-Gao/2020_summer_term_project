@@ -2,26 +2,32 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from Platform import models
 
+
 def login(request):
-    if request.method == 'GET' :
+    if request.method == 'GET':
         return render(request, 'login.html')
     else:
         number = request.POST.get('number')
-        pswd = request.POST.get('pswd')
-        if number and pswd:
-            user = models.user.objects.filter(number=number).filter(pswd=pswd)
-            if user:
+        pwd = request.POST.get('pswd')
+        if number and pwd:
+            User = models.User.objects.filter(uId=number).filter(uPwd=pwd)
+            Restaurant = models.Restaurant.filter(rId=number).filter(rPwd=pwd)
+            Administrator = models.Administrator.filter(aId=number).filter(aPwd=pwd)
+            if User:
                 request.session['number'] = number
                 request.session['islogin'] = True
-                if user[0].usertype == '学生':
-                    return redirect('/index_student/')
-                elif user[0].usertype == '教师':
-                    return redirect('/index_teacher/')
-                else:
-                    return redirect('/index_manager/')
+                return redirect('/index_user/')
+            elif Restaurant:
+                request.session['number'] = number
+                request.session['islogin'] = True
+                return redirect('/index_restaurant/')
+            elif Administrator:
+                request.session['number'] = number
+                request.session['islogin'] = True
+                return redirect('/index_administrator/')
             else:
-                # 密码错误
-                messages.success(request, "密码错误")
+                # 密码错误或账号不存在
+                messages.success(request, "密码错误或账号不存在")
                 return render(request, 'login.html')
         # 账号或密码不存在
         else:
@@ -55,7 +61,7 @@ def index_student(request):
     else:
         number = request.session.get('number')
         user = models.user.objects.filter(number=number)
-        return render(request, 'index_student.html', context={'name': user[0].name, 'number': number,
+        return render(request, 'index_user.html', context={'name': user[0].name, 'number': number,
                                                               'department': user[0].department, 'sex': user[0].sex,
                                                               'age': user[0].age})
 

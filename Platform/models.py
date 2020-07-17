@@ -34,7 +34,7 @@ class Menu(models.Model):
 
 
 class Order(models.Model):
-    oId = models.CharField(primary_key=True, max_length=8)
+    oId = models.AutoField(primary_key=True)
     oTime = models.DateTimeField()
     number = models.IntegerField()
     money = models.IntegerField()
