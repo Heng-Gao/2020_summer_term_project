@@ -60,10 +60,9 @@ def index_user(request):
         return redirect('/login/')
     else:
         number = request.session.get('number')
-        user = models.user.objects.filter(number=number)
-        return render(request, 'index_user.html', context={'name': user[0].name, 'number': number,
-                                                           'department': user[0].department, 'sex': user[0].sex,
-                                                           'age': user[0].age})
+        user = models.User.objects.filter(uId=number)
+        return render(request, 'index_user.html', context={'name': user[0].uName, 'addr': user[0].uAddr,
+                                                            'id': user[0].uId,'tel': user[0].uPhone})
 
 
 def index_restaurant(request):
@@ -71,10 +70,9 @@ def index_restaurant(request):
         return redirect('/login/')
     else:
         number = request.session.get('number')
-        user = models.user.objects.filter(number=number)
-        return render(request, 'index_restaurant.html', context={'name': user[0].name, 'number': number,
-                                                                 'department': user[0].department, 'sex': user[0].sex,
-                                                                 'age': user[0].age})
+        restaurant = models.Restaurant.objects.filter(rId=number)
+        return render(request, 'index_restaurant.html', context={'id': restaurant[0].rId,'name': restaurant[0].rName, 'addr': restaurant[0].rAddr,
+                                                                    'tel': restaurant[0].rTel, 'dysy': restaurant[0].dysy})
 
 
 def index_administrator(request):
@@ -460,8 +458,8 @@ def term_edit(request):
                                                               'term_data': term_data})
 
 
-def register(request):
-    uname = request.POST.get('name')
-    upwd = request.POST.get('pwd')
-    uaddr = request.POST.get('addr')
-    uphone = request.POST.get('phone')
+# def register(request):
+#     uname = request.POST.get('name')
+#     upwd = request.POST.get('pwd')
+#     uaddr = request.POST.get('addr')
+#     uphone = request.POST.get('phone')
