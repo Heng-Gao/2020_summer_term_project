@@ -10,18 +10,18 @@ def login(request):
         number = request.POST.get('number')
         pwd = request.POST.get('pswd')
         if number and pwd:
-            User = models.User.objects.filter(uId=number).filter(uPwd=pwd)
-            Restaurant = models.Restaurant.filter(rId=number).filter(rPwd=pwd)
-            Administrator = models.Administrator.filter(aId=number).filter(aPwd=pwd)
-            if User:
+            user = models.User.objects.filter(uId=number).filter(uPwd=pwd)
+            restaurant = models.Restaurant.objects.filter(rId=number).filter(rPwd=pwd)
+            administrator = models.Administrator.objects.filter(aId=number).filter(aPwd=pwd)
+            if user:
                 request.session['number'] = number
                 request.session['islogin'] = True
                 return redirect('/index_user/')
-            elif Restaurant:
+            elif restaurant:
                 request.session['number'] = number
                 request.session['islogin'] = True
                 return redirect('/index_restaurant/')
-            elif Administrator:
+            elif administrator:
                 request.session['number'] = number
                 request.session['islogin'] = True
                 return redirect('/index_administrator/')
@@ -55,37 +55,36 @@ def index(request):
             return redirect('/index_manager/')
 
 
-def index_student(request):
+def index_user(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
         number = request.session.get('number')
         user = models.user.objects.filter(number=number)
         return render(request, 'index_user.html', context={'name': user[0].name, 'number': number,
-                                                              'department': user[0].department, 'sex': user[0].sex,
-                                                              'age': user[0].age})
+                                                           'department': user[0].department, 'sex': user[0].sex,
+                                                           'age': user[0].age})
 
 
-def index_teacher(request):
+def index_restaurant(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
         number = request.session.get('number')
         user = models.user.objects.filter(number=number)
-        return render(request, 'index_teacher.html', context={'name': user[0].name, 'number': number,
-                                                              'department': user[0].department, 'sex': user[0].sex,
-                                                              'age': user[0].age})
+        return render(request, 'index_restaurant.html', context={'name': user[0].name, 'number': number,
+                                                                 'department': user[0].department, 'sex': user[0].sex,
+                                                                 'age': user[0].age})
 
 
-def index_manager(request):
+def index_administrator(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
         number = request.session.get('number')
-        user = models.user.objects.filter(number=number)
-        return render(request, 'index_manager.html', context={'name': user[0].name, 'number': number,
-                                                              'department': user[0].department, 'sex': user[0].sex,
-                                                              'age': user[0].age})
+        admin = models.Administrator.objects.filter(aId=number)
+        return render(request, 'index_administrator.html', context={'name': admin[0].aName, 'gender': admin[0].aGender,
+                                                                    'id': admin[0].aId, 'age': admin[0].aAge})
 
 
 def student_scores(request):
