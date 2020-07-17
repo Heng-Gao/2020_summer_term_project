@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f2d716a-de86-4ef3-af7b-95a59c885984" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Platform/templates/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/templates/index_manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/index_administrator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/templates/index_teacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/index_restaurant.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/index_administrator.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/index_administrator.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Platform/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/static/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Platform/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Platform/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -64,7 +66,7 @@
       <workItem from="1594823233599" duration="315000" />
       <workItem from="1594827667933" duration="1644000" />
       <workItem from="1594905166238" duration="5756000" />
-      <workItem from="1594951001999" duration="8461000" />
+      <workItem from="1594951001999" duration="17381000" />
     </task>
     <task id="LOCAL-00001" summary="第二次修改">
       <created>1594823448823</created>
@@ -87,7 +89,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594962655740</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="version:1.0.3&#10;complete the admin's index page">
+      <created>1594964236246</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1594964236246</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,17 +110,18 @@
     <MESSAGE value="第二次修改" />
     <MESSAGE value="rebuild database" />
     <MESSAGE value="version:1.0.2&#10;rebuild database again and rewrite the login page" />
-    <option name="LAST_COMMIT_MESSAGE" value="version:1.0.2&#10;rebuild database again and rewrite the login page" />
+    <MESSAGE value="version:1.0.3&#10;complete the admin's index page" />
+    <option name="LAST_COMMIT_MESSAGE" value="version:1.0.3&#10;complete the admin's index page" />
   </component>
   <component name="WindowStateProjectService">
     <state x="176" y="136" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1593269881026">
       <screen x="0" y="0" width="1440" height="960" />
     </state>
     <state x="176" y="136" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.960@0.0.1440.960" timestamp="1593269881026" />
-    <state x="441" y="40" width="829" height="920" key="CommitChangelistDialog2" timestamp="1594962654783">
+    <state x="392" y="7" width="829" height="920" key="CommitChangelistDialog2" timestamp="1594964235501">
       <screen x="0" y="0" width="1440" height="960" />
     </state>
-    <state x="441" y="40" width="829" height="920" key="CommitChangelistDialog2/0.0.1440.960@0.0.1440.960" timestamp="1594962654783" />
+    <state x="392" y="7" width="829" height="920" key="CommitChangelistDialog2/0.0.1440.960@0.0.1440.960" timestamp="1594964235501" />
     <state x="588" y="112" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594821306460" />
     <state x="668" y="256" key="FileChooserDialogImpl" timestamp="1594821112411">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -123,10 +133,10 @@
     </state>
     <state x="207" y="122" key="SettingsEditor/0.0.1440.960@0.0.1440.960" timestamp="1594734608969" />
     <state x="276" y="132" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594821258046" />
-    <state x="313" y="214" key="Vcs.Push.Dialog.v2" timestamp="1594962675807">
+    <state x="313" y="214" key="Vcs.Push.Dialog.v2" timestamp="1594964247561">
       <screen x="0" y="0" width="1440" height="960" />
     </state>
-    <state x="313" y="214" key="Vcs.Push.Dialog.v2/0.0.1440.960@0.0.1440.960" timestamp="1594962675807" />
+    <state x="313" y="214" key="Vcs.Push.Dialog.v2/0.0.1440.960@0.0.1440.960" timestamp="1594964247561" />
     <state x="547" y="355" width="347" height="253" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1594955780685">
       <screen x="0" y="0" width="1440" height="960" />
     </state>

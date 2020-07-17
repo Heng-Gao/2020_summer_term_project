@@ -1,9 +1,11 @@
 from django.urls import path
 from Platform import views
+
 urlpatterns = [
     path('', views.index),
     path('index/', views.index),
     path('login/', views.login),
+    path('register/', views.register),
     path('index_user/', views.index_user),
     path('index_restaurant/', views.index_restaurant),
     path('index_administrator/', views.index_administrator),
@@ -21,4 +23,3 @@ urlpatterns = [
     path('course_submit/', views.course_submit),
     path('term_edit/', views.term_edit),
 ]
-

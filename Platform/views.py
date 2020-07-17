@@ -283,20 +283,11 @@ def user_edit(request):
     else:
         selected_department = request.GET.get('selected_department')
         number = request.session.get('number')
-        user = models.user.objects.filter(number=number)
-        term_data = models.term.objects.filter(status='current')
-        current_term = ' '
-        for i in term_data:
-            current_term = i.name + i.id
-        user_data = models.user.objects.all()  # 用户表
-        department_data = []  # 院系的集合
-        for i in user_data:  # 去重
-            if i.department not in department_data:
-                department_data.append(i.department)
+        user = models.User.objects.filter(uId=number)
+        user_data = models.User.objects.all()  # 用户表
         if request.method == 'POST':  # 新增用户
-            number = request.POST.get('number')  # 不会与上文number冲突因为会重定向
-            name = request.POST.get('name')
-            department = request.POST.get('department')
+            newId = request.POST.get('number')  # 不会与上文number冲突因为会重定向
+            newName = request.POST.get('name')
             usertype = request.POST.get('usertype')
             sex = request.POST.get('sex')
             age = request.POST.get('age')
@@ -467,3 +458,10 @@ def term_edit(request):
             return render(request, 'term_edit.html', context={'name': user[0].name, 'number': number,
                                                               'current_term': current_term,
                                                               'term_data': term_data})
+
+
+def register(request):
+    uname = request.POST.get('name')
+    upwd = request.POST.get('pwd')
+    uaddr = request.POST.get('addr')
+    uphone = request.POST.get('phone')
