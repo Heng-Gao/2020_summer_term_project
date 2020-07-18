@@ -14,7 +14,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>课程选择</title>
+    <title>菜品分类</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,16 +49,16 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item" href="/student_timetable/"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">当前课表 Coursetable</span></a></li>
-        <li><a class="app-menu__item active" href="/course_selection/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">课程预选 Course Selection</span></a></li>
-        <li><a class="app-menu__item" href="/course_delete/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">课程删除 Course Delete</span></a></li>
-        <li><a class="app-menu__item" href="/student_scores/"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">课程成绩 Score</span></a></li>
+        <li><a class="app-menu__item" href="/student_timetable/"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">推荐菜品</span></a></li>
+        <li><a class="app-menu__item" href="/course_selection/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">分类点餐</span></a></li>
+        <li><a class="app-menu__item" href="/course_delete/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">当前订单</span></a></li>
+        <li><a class="app-menu__item" href="/student_scores/"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">历史订单</span></a></li>
         </ul>
     </aside>
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1 style="font-size:20px">上海大学选课系统——{{next_term}}</h1>
+          <h1 style="font-size:20px">欢迎来到饥肠辘辘-{{next_term}}</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -68,25 +68,25 @@
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
-          <h3 class="tile-tile">可选课程 Optional Courses</h3>
+          <h3 class="tile-tile">菜品一览</h3>
             <div class="tile-body">
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="sampleTable1">
                   <thead>
                     <tr>
-                      <th>课程号 Course Id</th>
-                      <th>课程名 Course Name</th>
-                      <th>学分 Course Credit</th>
-                      <th>教师 Teacher Name</th>
+                      <th>菜号</th>
+                      <th>菜名</th>
+                      <th>单价</th>
+                      <th>餐馆</th>
                     </tr>
                   </thead>
                   <tbody>
                     {% for item in opened_course %}
                     <tr>
-                      <td>{{item.id}}</td>
-                      <td>{{item.name}}</td>
-                      <td>{{item.credit}}</td>
-                      <td>{{item.teacher_name}}</td>
+                      <td>{{item.mId}}</td>
+                      <td>{{item.mName}}</td>
+                      <td>{{item.price}}</td>
+                      <td>{{item.restaurant.rName}}</td>
                     </tr>
                     {% endfor %}
                   </tbody>
@@ -97,16 +97,16 @@
         </div>
         <div class="col-md-12">
           <div class="tile">
-          <h3 class="tile-tile">已选课程 Selected Courses</h3>
+          <h3 class="tile-tile">老字号店铺</h3>
             <div class="tile-body">
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="sampleTable2">
                   <thead>
                     <tr>
-                      <th>课程号 Course Id</th>
-                      <th>课程名 Course Name</th>
-                      <th>学分 Course Credit</th>
-                      <th>教师 Teacher Name</th>
+                      <th>菜号</th>
+                      <th>菜名</th>
+                      <th>单价</th>
+                      <th>餐馆</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -126,11 +126,11 @@
         </div>
         <div class="col-md-12">
           <div class="tile">
-            <h3 class="tile-title">选择课程 Courses Selection</h3>
+            <h3 class="tile-title">点单</h3>
             <div class="tile-body">
               <form class="row" method="POST">
                 <div class="form-group col-md-3">
-                  <label class="control-label">课程号 Courses Id</label>
+                  <label class="control-label">菜号</label>
                   <input class="form-control" type="text" placeholder="Enter course id" name="id">
                 </div>
                 <div class="form-group col-md-4 align-self-end">

@@ -117,17 +117,18 @@ def course_selection(request):
         return redirect('/login/')
     else:
         number = request.session.get('number')
-        user = models.user.objects.filter(number=number)
-        opened_course = models.opened_course.objects.all()
-        selected_courses = models.courseinfo.objects.filter(student_number=number).filter(course_status='later')
-        term_data = models.term.objects.filter(status='later')
+        user = models.User.objects.filter(uId=number)
+        menu = models.Menu.objects.all()
+        print(menu)
+        order = models.Order.objects.filter(userId=number)
+        term_data = models.Restaurant.objects.all()
         next_term = ' '
         for i in term_data:
-            next_term = i.name + i.id
+            next_term = i.rName + i.rId
         if request.method == 'GET':
             return render(request, 'course_selection.html',
-                          context={'name': user[0].name, 'number': number, 'opened_course': opened_course,
-                                   'next_term': next_term, 'selected_courses': selected_courses})
+                          context={'name': user[0].uName, 'number': number, 'opened_course': menu,
+                                   'next_term': next_term, 'selected_courses': order})
         else:
             courseid_selected = request.POST.get('id')
             # 判断该课程是否已选
@@ -137,7 +138,7 @@ def course_selection(request):
                     return redirect('/course_selection/')
             # 判断输入课号是否存在
             course_existing = False
-            for item in opened_course:
+            for item in menu:
                 if item.id == courseid_selected:
                     course_existing = True
             if course_existing:

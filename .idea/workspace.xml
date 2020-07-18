@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f2d716a-de86-4ef3-af7b-95a59c885984" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/templates/index_restaurant.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/index_restaurant.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/templates/index_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/index_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/course_selection.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/course_selection.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Platform/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +91,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594964236246</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="version:1.0.3&#10;complete the admin's index page">
+      <created>1594994454353</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1594994454353</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,11 +120,11 @@
       <screen x="0" y="0" width="1440" height="960" />
     </state>
     <state x="176" y="136" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.960@0.0.1440.960" timestamp="1593269881026" />
-    <state x="392" y="7" width="829" height="920" key="CommitChangelistDialog2" timestamp="1594964235501">
-      <screen x="0" y="0" width="1440" height="960" />
+    <state x="588" y="112" width="829" height="920" key="CommitChangelistDialog2" timestamp="1594994452138">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="392" y="7" width="829" height="920" key="CommitChangelistDialog2/0.0.1440.960@0.0.1440.960" timestamp="1594964235501" />
-    <state x="588" y="112" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594821306460" />
+    <state x="588" y="112" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594994452138" />
     <state x="668" y="256" key="FileChooserDialogImpl" timestamp="1594821112411">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -131,18 +135,19 @@
     </state>
     <state x="207" y="122" key="SettingsEditor/0.0.1440.960@0.0.1440.960" timestamp="1594734608969" />
     <state x="276" y="132" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594821258046" />
-    <state x="313" y="214" key="Vcs.Push.Dialog.v2" timestamp="1594964247561">
-      <screen x="0" y="0" width="1440" height="960" />
+    <state x="417" y="232" key="Vcs.Push.Dialog.v2" timestamp="1594994513966">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="313" y="214" key="Vcs.Push.Dialog.v2/0.0.1440.960@0.0.1440.960" timestamp="1594964247561" />
+    <state x="417" y="232" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594994513966" />
     <state x="547" y="355" width="347" height="253" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1594955780685">
       <screen x="0" y="0" width="1440" height="960" />
     </state>
     <state x="547" y="355" width="347" height="253" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1440.960@0.0.1440.960" timestamp="1594955780685" />
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1594992688172">
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1595060600841">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594992688172" />
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595060600841" />
     <state x="752" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1594821180230">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
