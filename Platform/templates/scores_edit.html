@@ -14,7 +14,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>成绩录入</title>
+    <title>修改菜谱</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,7 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="/index_teacher/">SHU-teacher</a>
+    <header class="app-header"><a class="app-header__logo" href="/index_teacher/">takeaway-platform</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -44,35 +44,37 @@
       <div class="app-sidebar__user">
         <img style="height:45px;margin-right:30px;" src="{% static "images/teacher.jpg" %}" alt="User Image">
         <div>
-          <p class="app-sidebar__user-name">{{name}}</p>
-          <p class="app-sidebar__user-designation">{{number}}</p>
+          <p class="app-sidebar__user-name">欢迎您：{{name}}</p>
+          <p class="app-sidebar__user-designation">商户号：{{id}}</p>
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item" href="/teacher_coursetable/"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">我的课程 Coursetable</span></a></li>
-        <li><a class="app-menu__item active" href="/scores_edit/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">成绩录入 Scores Edit</span></a></li>
+        <li><a class="app-menu__item" href="/handle_current/"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">处理当前订单</span></a></li>
+        <li><a class="app-menu__item active" href="/scores_edit/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">修改菜谱</span></a></li>
+        <li><a class="app-menu__item active" href="#"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">新建活动</span></a></li>
+        <li><a class="app-menu__item" href="/restaurant_history/"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">历史订单</span></a></li>
         </ul>
     </aside>
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1 style="font-size:20px">上海大学课程系统——{{current_term}}</h1>
+          <h1 style="font-size:20px">饥肠辘辘外卖平台</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a style="font-size:13px;" href="#">成绩录入 scores edit</a></li>
+          <li class="breadcrumb-item"><a style="font-size:13px;" href="#">修改菜单</a></li>
         </ul>
       </div>
       <div class="row">
         <div class="col-lg-12">
             <div class="bs-component">
               <ul class="nav nav-pills">
-                <li class="nav-item"><a class="nav-link disabled">选择课程 Select Course</a></li>
+                <li class="nav-item"><a class="nav-link disabled">选择要修改的菜</a></li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">——{{course_name}}——</a>
                   <div class="dropdown-menu">
                     {% for item in courses_data %}
-                    <a class="dropdown-item" href="/scores_edit/?course_name={{item.course_name}}">{{ item.course_name }}</a>
+                    <a class="dropdown-item" href="/scores_edit/?course_name={{item.mName}}">{{ item.mName }}</a>
                     {% endfor %}
                   </div>
                 </li>
@@ -86,25 +88,21 @@
                 <table class="table table-hover table-bordered" id="sampleTable">
                   <thead>
                     <tr>
-                      <th>课程号</br>Course Id</th>
-                      <th>课程名</br>Course Name</th>
-                      <th>课程学分</br>Course Credit</th>
-                      <th>学生编号</br>Student Number</th>
-                      <th>学生姓名</br>Student Name</th>
-                      <th>成绩</br>Student Score</th>
-                      <th>成绩录入</br>Score Edit</th>
+                      <th>菜号</br> Id</th>
+                      <th>菜名</br> Name</th>
+                      <th>价格</br> Price</th>
+
+                      <th>录入修改</br> Edit</th>
                     </tr>
                   </thead>
                   <tbody>
                     {% for item in student_data %}
                     <tr>
-                      <td>{{item.course_id}}</td>
-                      <td>{{item.course_name}}</td>
-                      <td>{{item.course_credit}}</td>
-                      <td>{{item.student_number}}</td>
-                      <td>{{item.student_name}}</td>
-                      <td>{{item.student_score}}</td>
-                      <td><a href="/scores_submit/?course_id={{item.course_id}}&student_number={{item.student_number}}">编辑 Edit</a></td>
+                      <td>{{item.mId}}</td>
+                      <td>{{item.mName}}</td>
+                      <td>{{item.price}}</td>
+
+                      <td><a href="/scores_submit/?mid={{item.mId}}&mName={{item.mName}}&price={{item.price}}">修改</a></td>
                     </tr>
                     {% endfor %}
                   </tbody>

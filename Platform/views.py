@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from Platform import models
-
+import datetime
 
 def login(request):
     if request.method == 'GET':
@@ -85,156 +85,102 @@ def index_administrator(request):
                                                                     'id': admin[0].aId, 'age': admin[0].aAge})
 
 
-def student_scores(request):
+def history(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
         number = request.session.get('number')
-        user = models.user.objects.filter(number=number)
-        scores_data = models.courseinfo.objects.filter(student_number=number).filter(course_status='past')
-        return render(request, 'student_scores.html', context={'name': user[0].name, 'number': number,
-                                                               'scores_data': scores_data})
+        user = models.User.objects.filter(uId=number)
+        order = models.Order.objects.filter(userId_id=number)
+        return render(request, 'history.html', context={'name': user[0].uName, 'number': number,
+                                                               'order': order})
 
 
-def student_timetable(request):
-    if not request.session.get('islogin', None):
-        return redirect('/login/')
-    else:
-        number = request.session.get('number')
-        user = models.user.objects.filter(number=number)
-        scores_data = models.courseinfo.objects.filter(student_number=number).filter(course_status='current')
-        term_data = models.term.objects.filter(status='current')
-        current_term = ' '
-        for i in term_data:
-            current_term = i.name + i.id
-        return render(request, 'student_timetable.html', context={'name': user[0].name, 'number': number,
-                                                                  'scores_data': scores_data,
-                                                                  'current_term': current_term})
-
-
-def course_selection(request):
+def reserve(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
         number = request.session.get('number')
         user = models.User.objects.filter(uId=number)
         menu = models.Menu.objects.all()
-        print(menu)
-        order = models.Order.objects.filter(userId=number)
-        term_data = models.Restaurant.objects.all()
-        next_term = ' '
-        for i in term_data:
-            next_term = i.rName + i.rId
+        restaurant = models.Restaurant.objects.all()
+
         if request.method == 'GET':
-            return render(request, 'course_selection.html',
-                          context={'name': user[0].uName, 'number': number, 'opened_course': menu,
-                                   'next_term': next_term, 'selected_courses': order})
+            return render(request, 'reserve.html',
+                          context={'name': user[0].uName, 'number': number, 'menu': menu,
+                                    'restaurant': restaurant})
         else:
-            courseid_selected = request.POST.get('id')
-            # 判断该课程是否已选
-            for item in selected_courses:
-                if item.course_id == courseid_selected:
-                    messages.success(request, '已选此课程，不可重复选择')
-                    return redirect('/course_selection/')
-            # 判断输入课号是否存在
-            course_existing = False
-            for item in menu:
-                if item.id == courseid_selected:
-                    course_existing = True
-            if course_existing:
-                #   写入选课信息
-                course_selected = models.opened_course.objects.filter(id=courseid_selected)
-                course_id = courseid_selected
-                course_name = course_selected[0].name
-                course_credit = course_selected[0].credit
-                teacher_number = course_selected[0].teacher_number
-                teacher_name = course_selected[0].teacher_name
-                student_number = number
-                student_name = user[0].name
-                models.courseinfo.objects.create(course_id=course_id, course_name=course_name,
-                                                 course_credit=course_credit, course_status='later',
-                                                 teacher_number=teacher_number, teacher_name=teacher_name,
-                                                 student_number=student_number, student_name=student_name,
-                                                 student_score=None)
-                messages.success(request, '选课成功')
-                return redirect('/course_selection/')
-            else:
-                messages.success(request, '无此门课程')
-                return redirect('/course_selection/')
+            mid = request.POST.get('mId')
+            count = request.POST.get('count')
+            menu = models.Menu.objects.filter(mId=mid)
+            price =int(menu[0].price) * int(count)
+            str = '%d' % price
+            messages.success(request, "应付款"+str)
+            time=datetime.datetime.now()
+            models.Order.objects.create(oTime=time,number=count, money=price,
+                                        menuId_id=mid, userId_id=number,status='处理中')
+            messages.success(request, '下单成功')
+            return redirect('/reserve/')
 
 
-#   删除课程
-def course_delete(request):
+def current(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
         number = request.session.get('number')
-        user = models.user.objects.filter(number=number)
-        selected_courses = models.courseinfo.objects.filter(student_number=number).filter(course_status='later')
-        term_data = models.term.objects.filter(status='later')
-        next_term = ' '
-        for i in term_data:
-            next_term = i.name + i.id
+        user = models.User.objects.filter(uId=number)
+        order = models.Order.objects.filter(status='处理中')
+
         if request.method == 'GET':
-            return render(request, 'course_delete.html',
-                          context={'name': user[0].name, 'number': number, 'next_term': next_term,
-                                   'selected_courses': selected_courses})
+            return render(request, 'current.html', context={'name': user[0].uName, 'number': number,
+                                                                  'order': order})
         else:
             courseid_deleted = request.POST.get('id')
-            # 判断该课程是否已选
-            for item in selected_courses:
-                if item.course_id == courseid_deleted:
-                    models.courseinfo.objects.filter(student_number=number).filter(course_id=courseid_deleted).delete()
-                    messages.success(request, '退课成功')
-                    return redirect('/course_delete/')
-            # 没有选择该课程
-            messages.success(request, '没有选择编号为' + courseid_deleted + '的课程')
-            return redirect('/course_delete/')
+            models.Order.objects.filter(oId=courseid_deleted).update(status='已退订')
+            messages.success(request, '退单成功')
+            return redirect('/current/')
 
 
-def teacher_coursetable(request):
+def handle_current(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
         number = request.session.get('number')
-        user = models.user.objects.filter(number=number)
-        courses_data = models.courseinfo.objects.filter(teacher_number=number).filter(
-            course_status='current').distinct()
-        term_data = models.term.objects.filter(status='current')
-        current_term = ' '
-        for i in term_data:
-            current_term = i.name + i.id
-        return render(request, 'teacher_coursetable.html', context={'name': user[0].name, 'number': number,
-                                                                    'courses_data': courses_data,
-                                                                    'current_term': current_term})
+        user = models.Restaurant.objects.filter(rId=number)
+        order = models.Order.objects.filter(status='处理中')
+
+        if request.method == 'GET':
+            return render(request, 'restaurant_handle.html', context={'name': user[0].rName, 'number': number,
+                                                                  'order': order})
+        else:
+            courseid_deleted = request.POST.get('id')
+            models.Order.objects.filter(oId=courseid_deleted).update(status='已完成')
+            messages.success(request, '订单已发货！')
+            return redirect('/handle_current/')
+
 
 
 def scores_edit(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
-    else:  # 下拉框未选课程
+    else:
         cname = request.GET.get('course_name')
         number = request.session.get('number')
-        user = models.user.objects.filter(number=number)
-        term_data = models.term.objects.filter(status='current')
-        current_term = ' '
-        for i in term_data:
-            current_term = i.name + i.id
-        courses_data = models.courseinfo.objects.filter(teacher_number=number).filter(
-            course_status='current').distinct()
+        user = models.Restaurant.objects.filter(rId=number)
+
+        courses_data = models.Menu.objects.filter(restaurantId_id=number)
         if cname:
-            student_data = models.courseinfo.objects.filter(course_name=cname).filter(course_status='current').filter(
-                teacher_number=number)
-            return render(request, 'scores_edit.html', context={'name': user[0].name, 'number': number,
-                                                                'current_term': current_term,
+            student_data = models.Menu.objects.filter(mName=cname)
+            return render(request, 'scores_edit.html', context={'name': user[0].rName, 'number': number,
+
                                                                 'courses_data': courses_data,
                                                                 'student_data': student_data,
                                                                 'course_name': cname})
-        else:  # 下拉框已选课程
-            cname = '未选择课程'
+        else:
+            cname = '未选中菜'
             student_data = courses_data
-            return render(request, 'scores_edit.html', context={'name': user[0].name, 'number': number,
-                                                                'current_term': current_term,
+            return render(request, 'scores_edit.html', context={'name': user[0].rName, 'number': number,
+
                                                                 'courses_data': courses_data,
                                                                 'student_data': student_data,
                                                                 'course_name': cname})
@@ -245,37 +191,36 @@ def scores_submit(request):
         return redirect('/login/')
     else:
         number = request.session.get('number')
-        user = models.user.objects.filter(number=number)
-        term_data = models.term.objects.filter(status='current')
-        current_term = ' '
-        for i in term_data:
-            current_term = i.name + i.id
+        user = models.Restaurant.objects.filter(rId=number)
+
         if request.method == 'GET':
-            course_id = request.GET.get('course_id')
-            student_number = request.GET.get('student_number')
-            student_name = models.user.objects.filter(number=student_number)
-            student_name = student_name[0].name
-            course_name = models.courseinfo.objects.filter(course_id=course_id)
-            request.session['tempid'] = course_name[0].id
-            course_name = course_name[0].course_name
-            return render(request, 'scores_submit.html', context={'name': user[0].name, 'number': number,
-                                                                  'current_term': current_term,
-                                                                  'student_number': student_number,
-                                                                  'student_name': student_name,
-                                                                  'course_name': course_name})
+            mid = request.GET.get('mid')
+            mName = request.GET.get('mName')
+            price = request.GET.get('price')
+
+            return render(request, 'scores_submit.html', context={ 'number': number,'mName':mName,'price':price,'mid':mid})
         else:
-            student_score = request.POST.get('id')
-            if student_score:
-                courseinfo_id = request.session['tempid']
-                models.courseinfo.objects.filter(id=courseinfo_id).update(student_score=student_score)
-                request.session['tempid'] = None
-                messages.success(request, '成绩录入成功')
-                return redirect('/scores_edit/')
-            else:
-                messages.success(request, '成绩不可为空')
-                return redirect('/scores_edit/')
+            mid= request.POST.get('mid')
+            food_name = request.POST.get('food_name')
+            food_price = request.POST.get('food_price')
+
+            models.Menu.objects.filter(restaurantId_id=number).filter(mId=mid).update(mName=food_name)
+            models.Menu.objects.filter(restaurantId_id=number).filter(mId=mid).update(price=food_price)
+
+            return redirect('/scores_edit/')
 
 
+def restaurant_history(request):
+    if not request.session.get('islogin', None):
+        return redirect('/login/')
+    else:
+        number = request.session.get('number')
+        restaurant = models.Restaurant.objects.filter(rId=number)
+        order = models.Order.objects.filter()
+
+
+        return render(request, 'restaurant_history.html', context={'name': restaurant[0].rName, 'number': number,
+                                                               'order': order})
 def user_edit(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
@@ -285,7 +230,7 @@ def user_edit(request):
         user = models.User.objects.filter(uId=number)
         user_data = models.User.objects.all()  # 用户表
         if request.method == 'POST':  # 新增用户
-            newId = request.POST.get('number')  # 不会与上文number冲突因为会重定向
+            newId = request.POST.get('number')
             newName = request.POST.get('name')
             usertype = request.POST.get('usertype')
             sex = request.POST.get('sex')

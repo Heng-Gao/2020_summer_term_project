@@ -14,7 +14,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>菜品分类</title>
+    <title>查看当前订单</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,7 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="/index_student/">SHU-student</a>
+    <header class="app-header"><a class="app-header__logo" href="/index_student/">takeaway-platform</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -44,78 +44,53 @@
       <div class="app-sidebar__user">
         <img style="height:45px;margin-right:30px;" src="{% static "images/student.jpg" %}" alt="User Image">
         <div>
-          <p class="app-sidebar__user-name">{{name}}</p>
-          <p class="app-sidebar__user-designation">{{number}}</p>
+          <p class="app-sidebar__user-name">VIP客户：{{name}}</p>
+          <p class="app-sidebar__user-designation">用户号：{{number}}</p>
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item" href="/student_timetable/"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">推荐菜品</span></a></li>
-        <li><a class="app-menu__item" href="/course_selection/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">分类点餐</span></a></li>
-        <li><a class="app-menu__item" href="/course_delete/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">当前订单</span></a></li>
-        <li><a class="app-menu__item" href="/student_scores/"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">历史订单</span></a></li>
+       <li><a class="app-menu__item" ><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">推荐菜品</span></a></li>
+        <li><a class="app-menu__item" href="/reserve/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">分类点餐</span></a></li>
+        <li><a class="app-menu__item" href="/current/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">当前订单</span></a></li>
+        <li><a class="app-menu__item" href="/history/"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">历史订单</span></a></li>
         </ul>
     </aside>
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1 style="font-size:20px">欢迎来到饥肠辘辘-{{next_term}}</h1>
+          <h1 style="font-size:20px">欢迎您：{{name}}</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a style="font-size:13px;" href="#">课程选择 course selection</a></li>
+          <li class="breadcrumb-item"><a style="font-size:13px;" href="#">查看当前订单</a></li>
         </ul>
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
-          <h3 class="tile-tile">菜品一览</h3>
-            <div class="tile-body">
-              <div class="table-responsive">
-                <table class="table table-hover table-bordered" id="sampleTable1">
-                  <thead>
-                    <tr>
-                      <th>菜号</th>
-                      <th>菜名</th>
-                      <th>单价</th>
-                      <th>餐馆</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for item in opened_course %}
-                    <tr>
-                      <td>{{item.mId}}</td>
-                      <td>{{item.mName}}</td>
-                      <td>{{item.price}}</td>
-                      <td>{{item.restaurant.rName}}</td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="tile">
-          <h3 class="tile-tile">老字号店铺</h3>
+            <h3 class="tile-tile">当前处理订单</h3>
             <div class="tile-body">
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="sampleTable2">
                   <thead>
                     <tr>
-                      <th>菜号</th>
-                      <th>菜名</th>
-                      <th>单价</th>
-                      <th>餐馆</th>
+                      <th>订单号</th>
+                      <th>下单时间</th>
+                      <th>用户</th>
+                      <th>套餐</th>
+                      <th>数量</th>
+                      <th>金额</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for item in selected_courses %}
+                    {% for item in order %}
                     <tr>
-                      <td>{{item.course_id}}</td>
-                      <td>{{item.course_name}}</td>
-                      <td>{{item.course_credit}}</td>
-                      <td>{{item.teacher_name}}</td>
+                      <td>{{item.oId}}</td>
+                      <td>{{item.oTime}}</td>
+                      <td>{{item.userId.uName}}</td>
+                      <td>{{item.menuId.mName}}</td>
+                      <td>{{item.number}}</td>
+                      <td>{{item.money}}</td>
                     </tr>
                     {% endfor %}
                   </tbody>
@@ -126,12 +101,12 @@
         </div>
         <div class="col-md-12">
           <div class="tile">
-            <h3 class="tile-title">点单</h3>
+            <h3 class="tile-title">退单</h3>
             <div class="tile-body">
               <form class="row" method="POST">
                 <div class="form-group col-md-3">
-                  <label class="control-label">菜号</label>
-                  <input class="form-control" type="text" placeholder="Enter course id" name="id">
+                  <label class="control-label">输入订单号</label>
+                  <input class="form-control" type="text" placeholder="hello" name="id">
                 </div>
                 <div class="form-group col-md-4 align-self-end">
                   <button class="btn btn-primary"><i class="fa fa-fw fa-lg fa-check-circle"></i>提交 Submit</button>
@@ -172,6 +147,7 @@
       	ga('create', 'UA-72504830-1', 'auto');
       	ga('send', 'pageview');
       }
+
     </script>
   </body>
 </html>

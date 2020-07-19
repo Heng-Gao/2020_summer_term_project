@@ -2,9 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f2d716a-de86-4ef3-af7b-95a59c885984" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Platform/migrations/0002_order_status.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Platform/migrations/0003_auto_20200719_1419.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Platform/templates/current.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Platform/templates/history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Platform/templates/reserve.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Platform/templates/restaurant_handle.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Platform/templates/restaurant_history.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/db_project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/db_project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/templates/course_selection.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/course_selection.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/course_delete.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/course_selection.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/index_restaurant.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/index_restaurant.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/index_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/index_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/scores_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/scores_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/scores_submit.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/scores_submit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/student_scores.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/student_timetable.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/teacher_coursetable.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/teacher_coursetable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Platform/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,34 +141,34 @@
       <screen x="0" y="0" width="1440" height="960" />
     </state>
     <state x="176" y="136" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.960@0.0.1440.960" timestamp="1593269881026" />
-    <state x="588" y="112" width="829" height="920" key="CommitChangelistDialog2" timestamp="1594994452138">
+    <state x="588" y="112" width="829" height="920" key="CommitChangelistDialog2" timestamp="1595063933715">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="392" y="7" width="829" height="920" key="CommitChangelistDialog2/0.0.1440.960@0.0.1440.960" timestamp="1594964235501" />
-    <state x="588" y="112" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594994452138" />
+    <state x="588" y="112" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1595063933715" />
     <state x="668" y="256" key="FileChooserDialogImpl" timestamp="1594821112411">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="501" y="236" key="FileChooserDialogImpl/0.0.1440.960@0.0.1440.960" timestamp="1588559392922" />
     <state x="668" y="256" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1594821112411" />
-    <state x="276" y="132" key="SettingsEditor" timestamp="1594821258046">
+    <state x="276" y="132" key="SettingsEditor" timestamp="1595121984560">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="207" y="122" key="SettingsEditor/0.0.1440.960@0.0.1440.960" timestamp="1594734608969" />
-    <state x="276" y="132" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594821258046" />
-    <state x="417" y="232" key="Vcs.Push.Dialog.v2" timestamp="1594994513966">
+    <state x="276" y="132" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1595121984560" />
+    <state x="417" y="232" key="Vcs.Push.Dialog.v2" timestamp="1595063968909">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="313" y="214" key="Vcs.Push.Dialog.v2/0.0.1440.960@0.0.1440.960" timestamp="1594964247561" />
-    <state x="417" y="232" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594994513966" />
+    <state x="417" y="232" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1595063968909" />
     <state x="547" y="355" width="347" height="253" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1594955780685">
       <screen x="0" y="0" width="1440" height="960" />
     </state>
     <state x="547" y="355" width="347" height="253" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1440.960@0.0.1440.960" timestamp="1594955780685" />
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1595060600841">
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1595121965935">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595060600841" />
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595121965935" />
     <state x="752" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1594821180230">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -156,5 +177,9 @@
       <screen x="0" y="0" width="1440" height="960" />
     </state>
     <state x="381" y="268" key="git4idea.merge.GitPullDialog/0.0.1440.960@0.0.1440.960" timestamp="1594905191158" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1595160422791">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1595160422791" />
   </component>
 </project>

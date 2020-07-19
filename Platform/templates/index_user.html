@@ -14,7 +14,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>教务处学生端</title>
+    <title>用户端</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,15 +44,15 @@
       <div class="app-sidebar__user">
         <img style="height:45px;margin-right:30px;" src="{% static "images/student.jpg" %}" alt="User Image">
         <div>
-          <p class="app-sidebar__user-name">欢迎您：{{name}}</p>
+          <p class="app-sidebar__user-name">VIP客户：{{name}}</p>
           <p class="app-sidebar__user-designation">用户号：{{id}}</p>
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item" href="/student_timetable/"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">推荐菜品</span></a></li>
-        <li><a class="app-menu__item" href="/course_selection/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">分类点餐</span></a></li>
-        <li><a class="app-menu__item" href="/course_delete/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">当前订单</span></a></li>
-        <li><a class="app-menu__item" href="/student_scores/"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">历史订单</span></a></li>
+        <li><a class="app-menu__item" ><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">推荐菜品</span></a></li>
+        <li><a class="app-menu__item" href="/reserve/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">分类点餐</span></a></li>
+        <li><a class="app-menu__item" href="/current/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">当前订单</span></a></li>
+        <li><a class="app-menu__item" href="/history/"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">历史订单</span></a></li>
       </ul>
     </aside>
     <main class="app-content">
@@ -68,7 +68,7 @@
       <div class="clearfix"></div>
       <div class="col-md-12">
           <div class="tile">
-            <h3 class="tile-title">欢迎您</h3>
+            <h3 class="tile-title">欢迎您：{{name}}</h3>
             <div class="table-responsive">
               <table class="table">
                 <thead>

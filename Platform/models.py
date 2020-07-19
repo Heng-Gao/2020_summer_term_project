@@ -35,8 +35,10 @@ class Menu(models.Model):
 
 class Order(models.Model):
     oId = models.AutoField(primary_key=True)
-    oTime = models.DateTimeField()
+    oTime = models.CharField(max_length=30)
     number = models.IntegerField()
     money = models.IntegerField()
+    status = models.CharField(max_length=10,blank=True)
     userId = models.ForeignKey(to="User", on_delete=models.CASCADE)
     menuId = models.ForeignKey(to="Menu", on_delete=models.CASCADE)
+
