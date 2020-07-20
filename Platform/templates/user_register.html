@@ -15,47 +15,32 @@
     <section class="material-half-bg">
       <div class="cover"></div>
     </section>
-    <section class="login-content">
+    <section class="register-content">
       <div class="logo">
-        <h1>饥肠辘辘外卖平台</h1>
+        <h1>饥肠辘辘</h1>
       </div>
-      <div class="login-box">
-        <form class="login-form" method="POST">
+      <div class="register-box">
+        <form class="register-form" method="POST">
           {% csrf_token %}
-          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>登录 SIGN IN</h3>
+          <h3 class="register-head"><i class="fa fa-lg fa-fw fa-user"></i>用户注册 SIGN IN</h3>
           <div class="form-group">
-            <label class="control-label">账号 USERNAME</label>
-            <input class="form-control" type="text" placeholder="Number" name="number" autofocus>
-          </div>
-          <div class="form-group">
+            <label class="control-label">用户名 USERNAME</label>
+            <input class="form-control" type="text" placeholder="Text" name="name" autofocus>
             <label class="control-label">密码 PASSWORD</label>
-            <input class="form-control" type="password" placeholder="Password" name="pswd" >
-          </div>
-          <div class="form-group">
-            <div class="utility">
-              <div class="animated-checkbox">
-                <label>
-                  <input type="checkbox"><span class="label-text">Stay Signed in</span>
-                </label>
-              </div>
-              <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
-            </div>
+            <input class="form-control" type="password" placeholder="Password" name="pwd1" >
+            <label class="control-label">确认密码 CHECK PASSWORD</label>
+            <input class="form-control" type="password" placeholder="Password" name="pwd2" >
+            <label class="control-label">地址 ADDRESS</label>
+            <input class="form-control" type="text" placeholder="Text" name="addr" >
+            <label class="control-label">电话 PHONE NUMBER</label>
+            <input class="form-control" type="text" placeholder="Text" name="phone" >
           </div>
           <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>登录 SIGN IN</button>
+            <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>注册 REGISTER</button>
           </div>
           <br/>
-          <center>
-            <p class="semibold-text mb-2"><a href="{% url 'user_register' %}">Register and Hunt for Food Right Now!</a> </p>
-            <p class="semibold-text mb-2"><a href="{% url 'restaurant_register' %}">Click Here to Register Your Restaurant!</a> </p>
-          </center>
         </form>
         <form class="forget-form">
-          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
-          <h3 class="login-head">请到教务处联系管理老师修改密码</h3>
-          <div class="form-group mt-3">
-            <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Back to Login</a></p>
-          </div>
           {% if messages %}
             <script>
               {% for msg in messages %}

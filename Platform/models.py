@@ -15,6 +15,7 @@ class Restaurant(models.Model):
     rName = models.CharField(max_length=15)
     rAddr = models.CharField(max_length=2)
     rTel = models.CharField(max_length=15)
+    rEmail = models.EmailField(default='1000000@163.com')
     dysy = models.IntegerField()
 
 
@@ -38,7 +39,6 @@ class Order(models.Model):
     oTime = models.CharField(max_length=30)
     number = models.IntegerField()
     money = models.IntegerField()
-    status = models.CharField(max_length=10,blank=True)
+    status = models.CharField(max_length=10, blank=True)
     userId = models.ForeignKey(to="User", on_delete=models.CASCADE)
     menuId = models.ForeignKey(to="Menu", on_delete=models.CASCADE)
-

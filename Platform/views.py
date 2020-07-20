@@ -3,6 +3,7 @@ from django.contrib import messages
 from Platform import models
 import datetime
 
+
 def login(request):
     if request.method == 'GET':
         return render(request, 'login.html')
@@ -62,7 +63,7 @@ def index_user(request):
         number = request.session.get('number')
         user = models.User.objects.filter(uId=number)
         return render(request, 'index_user.html', context={'name': user[0].uName, 'addr': user[0].uAddr,
-                                                            'id': user[0].uId,'tel': user[0].uPhone})
+                                                           'id': user[0].uId, 'tel': user[0].uPhone})
 
 
 def index_restaurant(request):
@@ -71,8 +72,9 @@ def index_restaurant(request):
     else:
         number = request.session.get('number')
         restaurant = models.Restaurant.objects.filter(rId=number)
-        return render(request, 'index_restaurant.html', context={'id': restaurant[0].rId,'name': restaurant[0].rName, 'addr': restaurant[0].rAddr,
-                                                                    'tel': restaurant[0].rTel, 'dysy': restaurant[0].dysy})
+        return render(request, 'index_restaurant.html',
+                      context={'id': restaurant[0].rId, 'name': restaurant[0].rName, 'addr': restaurant[0].rAddr,
+                               'tel': restaurant[0].rTel, 'dysy': restaurant[0].dysy})
 
 
 def index_administrator(request):
@@ -93,7 +95,7 @@ def history(request):
         user = models.User.objects.filter(uId=number)
         order = models.Order.objects.filter(userId_id=number)
         return render(request, 'history.html', context={'name': user[0].uName, 'number': number,
-                                                               'order': order})
+                                                        'order': order})
 
 
 def reserve(request):
@@ -108,17 +110,17 @@ def reserve(request):
         if request.method == 'GET':
             return render(request, 'reserve.html',
                           context={'name': user[0].uName, 'number': number, 'menu': menu,
-                                    'restaurant': restaurant})
+                                   'restaurant': restaurant})
         else:
             mid = request.POST.get('mId')
             count = request.POST.get('count')
             menu = models.Menu.objects.filter(mId=mid)
-            price =int(menu[0].price) * int(count)
+            price = int(menu[0].price) * int(count)
             str = '%d' % price
-            messages.success(request, "应付款"+str)
-            time=datetime.datetime.now()
-            models.Order.objects.create(oTime=time,number=count, money=price,
-                                        menuId_id=mid, userId_id=number,status='处理中')
+            messages.success(request, "应付款" + str)
+            time = datetime.datetime.now()
+            models.Order.objects.create(oTime=time, number=count, money=price,
+                                        menuId_id=mid, userId_id=number, status='处理中')
             messages.success(request, '下单成功')
             return redirect('/reserve/')
 
@@ -133,7 +135,7 @@ def current(request):
 
         if request.method == 'GET':
             return render(request, 'current.html', context={'name': user[0].uName, 'number': number,
-                                                                  'order': order})
+                                                            'order': order})
         else:
             courseid_deleted = request.POST.get('id')
             models.Order.objects.filter(oId=courseid_deleted).update(status='已退订')
@@ -151,13 +153,12 @@ def handle_current(request):
 
         if request.method == 'GET':
             return render(request, 'restaurant_handle.html', context={'name': user[0].rName, 'number': number,
-                                                                  'order': order})
+                                                                      'order': order})
         else:
             courseid_deleted = request.POST.get('id')
             models.Order.objects.filter(oId=courseid_deleted).update(status='已完成')
             messages.success(request, '订单已发货！')
             return redirect('/handle_current/')
-
 
 
 def scores_edit(request):
@@ -198,9 +199,10 @@ def scores_submit(request):
             mName = request.GET.get('mName')
             price = request.GET.get('price')
 
-            return render(request, 'scores_submit.html', context={ 'number': number,'mName':mName,'price':price,'mid':mid})
+            return render(request, 'scores_submit.html',
+                          context={'number': number, 'mName': mName, 'price': price, 'mid': mid})
         else:
-            mid= request.POST.get('mid')
+            mid = request.POST.get('mid')
             food_name = request.POST.get('food_name')
             food_price = request.POST.get('food_price')
 
@@ -218,41 +220,33 @@ def restaurant_history(request):
         restaurant = models.Restaurant.objects.filter(rId=number)
         order = models.Order.objects.filter()
 
-
         return render(request, 'restaurant_history.html', context={'name': restaurant[0].rName, 'number': number,
-                                                               'order': order})
-def user_edit(request):
+                                                                   'order': order})
+
+
+def audit_restaurant(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
         selected_department = request.GET.get('selected_department')
-        number = request.session.get('number')
-        user = models.User.objects.filter(uId=number)
-        user_data = models.User.objects.all()  # 用户表
-        if request.method == 'POST':  # 新增用户
-            newId = request.POST.get('number')
-            newName = request.POST.get('name')
-            usertype = request.POST.get('usertype')
-            sex = request.POST.get('sex')
-            age = request.POST.get('age')
-            pswd = request.POST.get('pswd')
-            if number and name and department and usertype and sex and age and pswd:
-                models.user.objects.create(number=number, name=name, department=department, usertype=usertype, sex=sex,
-                                           age=age, pswd=pswd)
-                return redirect('/user_edit/')
-            else:
-                # messages
-                return redirect('/user_edit')
+        rname = request.session['temp_name']
+        raddr = request.session['temp_addr']
+        rtel = request.session['temp_tel']
+        rmail = request.session['temp_email']
+        if rname and raddr and rtel and rmail:
+            return render(request, 'audit_restaurant.html', context={'name':rname,})
+
+
         if selected_department:  # 下拉框已选择院系
             user_data = models.user.objects.filter(department=selected_department)
-            return render(request, 'user_edit.html', context={'name': user[0].name, 'number': number,
+            return render(request, 'audit_restaurant.html', context={'name': user[0].name, 'number': number,
                                                               'current_term': current_term,
                                                               'department_data': department_data,
                                                               'user_data': user_data,
                                                               'selected_department': selected_department})
         else:  # 下拉框未选择院系
             selected_department = '未选择学院'
-            return render(request, 'user_edit.html', context={'name': user[0].name, 'number': number,
+            return render(request, 'audit_restaurant.html', context={'name': user[0].name, 'number': number,
                                                               'current_term': current_term,
                                                               'department_data': department_data,
                                                               'user_data': user_data,
@@ -404,8 +398,68 @@ def term_edit(request):
                                                               'term_data': term_data})
 
 
-# def register(request):
-#     uname = request.POST.get('name')
-#     upwd = request.POST.get('pwd')
-#     uaddr = request.POST.get('addr')
-#     uphone = request.POST.get('phone')
+def user_register(request):
+    if request.method == 'GET':
+        return render(request, 'user_register.html')
+    else:
+        uname = request.POST.get('name')
+        upwd1 = request.POST.get('pwd1')
+        upwd2 = request.POST.get('pwd2')
+        uaddr = request.POST.get('addr')
+        uphone = request.POST.get('phone')
+        if uname and upwd1 and upwd2 and uaddr and uphone:
+            if upwd1 != upwd2:
+                messages.error(request, '两次输入的密码不一致，请重新输入!')
+                return redirect('/user_register/')
+            else:
+                same_name = models.User.objects.filter(uName=uname)
+                if same_name:
+                    messages.error(request, '该用户名已被注册!')
+                    return redirect('/user_register/')
+
+                last_id = models.User.objects.order_by('-uId')[0].uId
+                new_id = str(int(last_id) + 1)
+
+                new_user = models.User()
+                new_user.uId = new_id
+                new_user.uName = uname
+                new_user.uPwd = upwd2
+                new_user.uAddr = uaddr
+                new_user.uPhone = uphone
+                new_user.save()
+                messages.success(request, '注册成功！')
+                return redirect('/login/')
+
+        else:
+            messages.error(request, '请完整填写注册信息！')
+            return redirect('/user_register/')
+
+
+def restaurant_register(request):
+    if request.method == 'GET':
+        return render(request, 'restaurant_register.html')
+    else:
+        rname = request.POST.get('name')
+        raddr = request.POST.get('addr')
+        rtel = request.POST.get('tel')
+        remail = request.POST.get('email')
+        if rname and raddr and rtel and remail:
+            same_name = models.User.objects.filter(uName=rname)
+            if same_name:
+                messages.error(request, '该餐厅名已被注册!')
+                return redirect('/restaurant_register/')
+
+            # last_id = models.Restaurant.objects.order_by('-rId')[0].rId
+            # new_id = str(int(last_id) + 1)
+
+            request.session['temp_name'] = rname
+            request.session['temp_addr'] = raddr
+            request.session['temp_tel'] = rtel
+            request.session['temp_email'] = remail
+
+            messages.success(request, '提交成功，管理员将在12小时内审核，请耐心等待！')
+            return redirect('/login/')
+
+        else:
+            messages.error(request, '请正确填写注册信息！')
+            return redirect('/restaurant_register/')
