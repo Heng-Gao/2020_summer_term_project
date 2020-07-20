@@ -228,29 +228,35 @@ def audit_restaurant(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
-        selected_department = request.GET.get('selected_department')
+        number = request.session.get('number')
+        admin = models.Administrator.objects.filter(aId=number)
         rname = request.session['temp_name']
+        print(type(rname))
+        print(rname)
         raddr = request.session['temp_addr']
         rtel = request.session['temp_tel']
-        rmail = request.session['temp_email']
-        if rname and raddr and rtel and rmail:
-            return render(request, 'audit_restaurant.html', context={'name':rname,})
+        remail = request.session['temp_email']
+        if rname and raddr and rtel and remail:
+            print("check")
+            return render(request, 'audit_restaurant.html',
+                          context={'name': admin[0].aName, 'rname': rname, 'addr': raddr, 'tel': rtel, 'email': remail})
 
+        print("check2")
+        new_restaurant = models.Restaurant()
+        new_restaurant.rName = rname
+        new_restaurant.rAddr = raddr
+        new_restaurant.rTel = rtel
+        new_restaurant.rEmail = remail
 
-        if selected_department:  # 下拉框已选择院系
-            user_data = models.user.objects.filter(department=selected_department)
-            return render(request, 'audit_restaurant.html', context={'name': user[0].name, 'number': number,
-                                                              'current_term': current_term,
-                                                              'department_data': department_data,
-                                                              'user_data': user_data,
-                                                              'selected_department': selected_department})
-        else:  # 下拉框未选择院系
-            selected_department = '未选择学院'
-            return render(request, 'audit_restaurant.html', context={'name': user[0].name, 'number': number,
-                                                              'current_term': current_term,
-                                                              'department_data': department_data,
-                                                              'user_data': user_data,
-                                                              'selected_department': selected_department})
+        last_id = models.Restaurant.objects.order_by('-rId')[0].rId
+        new_id = str(int(last_id) + 1)
+        rpwd = new_id
+        new_restaurant.rId = new_id
+        new_restaurant.rPwd = rpwd
+        new_restaurant.save()
+        messages.success(request, '审核通过！')
+        request.session.flush()
+        return render(request, 'audit_restaurant.html')
 
 
 def user_submit(request):
@@ -448,9 +454,6 @@ def restaurant_register(request):
             if same_name:
                 messages.error(request, '该餐厅名已被注册!')
                 return redirect('/restaurant_register/')
-
-            # last_id = models.Restaurant.objects.order_by('-rId')[0].rId
-            # new_id = str(int(last_id) + 1)
 
             request.session['temp_name'] = rname
             request.session['temp_addr'] = raddr

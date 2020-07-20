@@ -49,8 +49,8 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="/user_edit/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">用户管理 Users Edit</span></a></li>
-        <li><a class="app-menu__item" href="/course_edit/"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">课程管理 Courses Edit</span></a></li>
+        <li><a class="app-menu__item" href="/index_administrator/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">个人信息 Personal Data</span></a></li>
+        <li><a class="app-menu__item" href="/audit_restaurant/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">信息审核 Information Check</span></a></li>
         <li><a class="app-menu__item" href="/term_edit/"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">学期管理 Terms Edit</span></a></li>
         </ul>
     </aside>
@@ -64,22 +64,22 @@
           <li class="breadcrumb-item"><a style="font-size:13px;" href="#">用户管理 users edit</a></li>
         </ul>
       </div>
-      <div class="row">
-        <div class="col-lg-12">
-            <div class="bs-component">
-              <ul class="nav nav-pills">
-                <li class="nav-item"><a class="nav-link disabled">选择学院 Department</a></li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">——{{selected_department}}——</a>
-                  <div class="dropdown-menu">
-                    {% for item in department_data %}
-                    <a class="dropdown-item" href="/user_edit/?selected_department={{item}}">{{ item }}</a>
-                    {% endfor %}
-                  </div>
-                </li>
-              </ul>
-            </div>
-        </div>
+<!--      <div class="row">-->
+<!--        <div class="col-lg-12">-->
+<!--            <div class="bs-component">-->
+<!--              <ul class="nav nav-pills">-->
+<!--                <li class="nav-item"><a class="nav-link disabled">选择学院 Department</a></li>-->
+<!--                <li class="nav-item dropdown">-->
+<!--                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">——{{selected_department}}——</a>-->
+<!--                  <div class="dropdown-menu">-->
+<!--                    {% for item in department_data %}-->
+<!--                    <a class="dropdown-item" href="/user_edit/?selected_department={{item}}">{{ item }}</a>-->
+<!--                    {% endfor %}-->
+<!--                  </div>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
@@ -87,32 +87,24 @@
                 <table class="table table-hover table-bordered" id="sampleTable">
                   <thead>
                     <tr>
-                      <th>编号 Number</th>
-                      <th>姓名 Name</th>
-                      <th>学院 Department</th>
-                      <th>类型 UserType</th>
-                      <th>性别 Sex</th>
-                      <th>年龄 Age</th>
-                      <th>密码 Password</th>
-                      <th>操作 Edit</th>
+                      <th>餐厅名称 Name</th>
+                      <th>餐厅地址 Address</th>
+                      <th>联系电话 Telephone</th>
+                      <th>电子邮件 Email</th>
+                      <th>审核状态 Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for item in user_data %}
                     <tr>
-                      <td>{{item.number}}</td>
-                      <td>{{item.name}}</td>
-                      <td>{{item.department}}</td>
-                      <td>{{item.usertype}}</td>
-                      <td>{{item.sex}}</td>
-                      <td>{{item.age}}</td>
-                      <td>{{item.pswd}}</td>
+                      <td>{{rname}}</td>
+                      <td>{{addr}}</td>
+                      <td>{{tel}}</td>
+                      <td>{{email}}</td>
                       <td>
-                        <a href="/user_submit/?userid={{item.number}}&ope=1" style="padding:7px">编辑</a>
-                        <a href="/user_submit/?userid={{item.number}}&ope=0" style="padding:7px">删除</a>
+                        <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>审核通过</button>
+  <!--                        <a href="/user_submit/?userid={{item.number}}&ope=0" style="padding:7px">删除</a>-->
                       </td>
                     </tr>
-                    {% endfor %}
                   </tbody>
                 </table>
               </div>
