@@ -101,8 +101,10 @@
                       <td>{{tel}}</td>
                       <td>{{email}}</td>
                       <td>
+                        {% if status %}
                         <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>审核通过</button>
   <!--                        <a href="/user_submit/?userid={{item.number}}&ope=0" style="padding:7px">删除</a>-->
+                        {% endif %}
                       </td>
                     </tr>
                   </tbody>

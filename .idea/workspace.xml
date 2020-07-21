@@ -81,7 +81,8 @@
       <workItem from="1594905166238" duration="5756000" />
       <workItem from="1594951001999" duration="17381000" />
       <workItem from="1595165611023" duration="3824000" />
-      <workItem from="1595206711281" duration="34543000" />
+      <workItem from="1595206711281" duration="34660000" />
+      <workItem from="1595291956989" duration="2943000" />
     </task>
     <task id="LOCAL-00001" summary="第二次修改">
       <created>1594823448823</created>
@@ -125,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595245023849</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="version:1.0.5&#10;complete the user's register page&#10;half down the restaurant_register.html">
+      <created>1595262796855</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1595262796855</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,12 +168,12 @@
       <screen x="0" y="0" width="1440" height="960" />
     </state>
     <state x="176" y="136" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.960@0.0.1440.960" timestamp="1593269881026" />
-    <state x="588" y="116" width="829" height="920" key="CommitChangelistDialog2" timestamp="1595245022839">
+    <state x="588" y="116" width="829" height="920" key="CommitChangelistDialog2" timestamp="1595262796119">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="392" y="7" width="829" height="920" key="CommitChangelistDialog2/0.0.1440.960@0.0.1440.960" timestamp="1594964235501" />
     <state x="588" y="112" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1595063933715" />
-    <state x="588" y="116" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1595245022839" />
+    <state x="588" y="116" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1595262796119" />
     <state x="668" y="266" key="FileChooserDialogImpl" timestamp="1595166229273">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -177,12 +185,12 @@
     </state>
     <state x="207" y="122" key="SettingsEditor/0.0.1440.960@0.0.1440.960" timestamp="1594734608969" />
     <state x="276" y="132" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1595121984560" />
-    <state x="417" y="241" key="Vcs.Push.Dialog.v2" timestamp="1595245082543">
+    <state x="417" y="241" key="Vcs.Push.Dialog.v2" timestamp="1595262810311">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="313" y="214" key="Vcs.Push.Dialog.v2/0.0.1440.960@0.0.1440.960" timestamp="1594964247561" />
     <state x="417" y="232" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1595063968909" />
-    <state x="417" y="241" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1595245082543" />
+    <state x="417" y="241" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1595262810311" />
     <state x="547" y="355" width="347" height="253" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1594955780685">
       <screen x="0" y="0" width="1440" height="960" />
     </state>
@@ -195,10 +203,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="752" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594821180230" />
-    <state x="381" y="268" key="git4idea.merge.GitPullDialog" timestamp="1594905191158">
-      <screen x="0" y="0" width="1440" height="960" />
+    <state x="508" y="302" key="git4idea.merge.GitPullDialog" timestamp="1595292016266">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="381" y="268" key="git4idea.merge.GitPullDialog/0.0.1440.960@0.0.1440.960" timestamp="1594905191158" />
+    <state x="508" y="302" key="git4idea.merge.GitPullDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1595292016266" />
     <state x="623" y="234" width="672" height="705" key="search.everywhere.popup" timestamp="1595218160965">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

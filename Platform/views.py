@@ -230,33 +230,39 @@ def audit_restaurant(request):
     else:
         number = request.session.get('number')
         admin = models.Administrator.objects.filter(aId=number)
-        rname = request.session['temp_name']
+        rname = request.session.get('temp_name')
         print(type(rname))
-        print(rname)
-        raddr = request.session['temp_addr']
-        rtel = request.session['temp_tel']
-        remail = request.session['temp_email']
+        raddr = request.session.get('temp_addr')
+        rtel = request.session.get('temp_tel')
+        remail = request.session.get('temp_email')
+        status = False
+
         if rname and raddr and rtel and remail:
-            print("check")
-            return render(request, 'audit_restaurant.html',
-                          context={'name': admin[0].aName, 'rname': rname, 'addr': raddr, 'tel': rtel, 'email': remail})
+            status = True
+            if request.method == 'POST':
+                print("check2")
+                new_restaurant = models.Restaurant()
+                new_restaurant.rName = rname
+                new_restaurant.rAddr = raddr
+                new_restaurant.rTel = rtel
+                new_restaurant.rEmail = remail
 
-        print("check2")
-        new_restaurant = models.Restaurant()
-        new_restaurant.rName = rname
-        new_restaurant.rAddr = raddr
-        new_restaurant.rTel = rtel
-        new_restaurant.rEmail = remail
+                last_id = models.Restaurant.objects.order_by('-rId')[0].rId
+                new_id = str(int(last_id) + 1)
+                rpwd = new_id
+                new_restaurant.rId = new_id
+                new_restaurant.rPwd = rpwd
+                new_restaurant.save()
+                messages.success(request, '审核通过！')
+                request.session.flush()
+                return render(request, 'audit_restaurant.html')
 
-        last_id = models.Restaurant.objects.order_by('-rId')[0].rId
-        new_id = str(int(last_id) + 1)
-        rpwd = new_id
-        new_restaurant.rId = new_id
-        new_restaurant.rPwd = rpwd
-        new_restaurant.save()
-        messages.success(request, '审核通过！')
-        request.session.flush()
-        return render(request, 'audit_restaurant.html')
+            else:
+                return render(request, 'audit_restaurant.html',
+                              context={'name': admin[0].aName, 'rname': rname, 'addr': raddr, 'tel': rtel,
+                                       'email': remail, 'status': status})
+        else:
+            return render(request, 'audit_restaurant.html')
 
 
 def user_submit(request):
