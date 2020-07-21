@@ -228,41 +228,51 @@ def audit_restaurant(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
+        useless = models.TmpRestaurant.objects.filter(t_status=0).all()
+        if useless:
+            useless.delete()
         number = request.session.get('number')
         admin = models.Administrator.objects.filter(aId=number)
-        rname = request.session.get('temp_name')
-        print(type(rname))
-        raddr = request.session.get('temp_addr')
-        rtel = request.session.get('temp_tel')
-        remail = request.session.get('temp_email')
-        status = False
+        temp_res = models.TmpRestaurant.objects.all()
+        checked = 0
 
-        if rname and raddr and rtel and remail:
-            status = True
-            if request.method == 'POST':
-                print("check2")
-                new_restaurant = models.Restaurant()
-                new_restaurant.rName = rname
-                new_restaurant.rAddr = raddr
-                new_restaurant.rTel = rtel
-                new_restaurant.rEmail = remail
-
-                last_id = models.Restaurant.objects.order_by('-rId')[0].rId
-                new_id = str(int(last_id) + 1)
-                rpwd = new_id
-                new_restaurant.rId = new_id
-                new_restaurant.rPwd = rpwd
-                new_restaurant.save()
-                messages.success(request, '审核通过！')
-                request.session.flush()
-                return render(request, 'audit_restaurant.html')
+        if temp_res:
+            if request.method == 'GET':
+                return render(request, 'audit_restaurant.html',
+                              context={'name': admin[0].aName, 'temp_res': temp_res})
 
             else:
-                return render(request, 'audit_restaurant.html',
-                              context={'name': admin[0].aName, 'rname': rname, 'addr': raddr, 'tel': rtel,
-                                       'email': remail, 'status': status})
+                temp_id = request.POST.get('temp_id')
+                temp = temp_res.filter(t_id=temp_id).get()
+                checked = request.POST.get('check')
+                if checked == '1':
+                    new_restaurant = models.Restaurant()
+                    new_restaurant.rName = temp.t_name
+                    new_restaurant.rAddr = temp.t_addr
+                    new_restaurant.rTel = temp.t_tel
+                    new_restaurant.rEmail = temp.t_email
+
+                    last_id = models.Restaurant.objects.order_by('-rId')[0].rId
+                    new_id = "000" + str(int(last_id))
+                    rpwd = new_id
+                    new_restaurant.rId = new_id
+                    new_restaurant.rPwd = rpwd
+                    new_restaurant.save()
+                    temp.t_status = 0
+                    temp.save()
+
+                    # models.Restaurant.objects.get(rId='4').delete()
+                    # messages.success(request, '审核通过！')
+                    return render(request, 'audit_restaurant.html',
+                                  context={'name': admin[0].aName, 'temp_res': temp_res})
+                else:
+                    temp.t_status = 0
+                    temp.save()
+                    return render(request, 'audit_restaurant.html',
+                                  context={'name': admin[0].aName, 'temp_res': temp_res})
         else:
-            return render(request, 'audit_restaurant.html')
+            return render(request, 'audit_restaurant.html',
+                          context={'name': admin[0].aName})
 
 
 def user_submit(request):
@@ -461,10 +471,12 @@ def restaurant_register(request):
                 messages.error(request, '该餐厅名已被注册!')
                 return redirect('/restaurant_register/')
 
-            request.session['temp_name'] = rname
-            request.session['temp_addr'] = raddr
-            request.session['temp_tel'] = rtel
-            request.session['temp_email'] = remail
+            new_tmp_res = models.TmpRestaurant()
+            new_tmp_res.t_name = rname
+            new_tmp_res.t_addr = raddr
+            new_tmp_res.t_tel = rtel
+            new_tmp_res.t_email = remail
+            new_tmp_res.save()
 
             messages.success(request, '提交成功，管理员将在12小时内审核，请耐心等待！')
             return redirect('/login/')
