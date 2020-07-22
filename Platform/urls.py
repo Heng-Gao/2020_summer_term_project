@@ -15,12 +15,9 @@ urlpatterns = [
     path('current/', views.current),
     path('handle_current/', views.handle_current),
     path('logout/', views.logout),
-    path('scores_edit/', views.scores_edit),
-    path('scores_submit/', views.scores_submit),
+    path('edit_menu/', views.edit_menu),
+    path('menu_submit/', views.menu_submit),
     path('restaurant_history/', views.restaurant_history),
     path('audit_restaurant/', views.audit_restaurant),
-    path('delete_restaurant/', views.delete_restaurant),
-    path('user_submit/', views.user_submit),
-    path('course_submit/', views.course_submit),
-    path('term_edit/', views.term_edit),
+    path('delete_restaurant/', views.delete_restaurant)
 ]
