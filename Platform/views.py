@@ -253,7 +253,7 @@ def audit_restaurant(request):
                     new_restaurant.rEmail = temp.t_email
 
                     last_id = models.Restaurant.objects.order_by('-rId')[0].rId
-                    new_id = "000" + str(int(last_id))
+                    new_id = "000" + str(int(last_id) + 1)
                     rpwd = new_id
                     new_restaurant.rId = new_id
                     new_restaurant.rPwd = rpwd
@@ -261,18 +261,33 @@ def audit_restaurant(request):
                     temp.t_status = 0
                     temp.save()
 
-                    # models.Restaurant.objects.get(rId='4').delete()
                     # messages.success(request, '审核通过！')
-                    return render(request, 'audit_restaurant.html',
-                                  context={'name': admin[0].aName, 'temp_res': temp_res})
+                    return redirect('/audit_restaurant/')
                 else:
                     temp.t_status = 0
                     temp.save()
-                    return render(request, 'audit_restaurant.html',
-                                  context={'name': admin[0].aName, 'temp_res': temp_res})
+                    return redirect('/audit_restaurant/')
         else:
             return render(request, 'audit_restaurant.html',
                           context={'name': admin[0].aName})
+
+
+def delete_restaurant(request):
+    if not request.session.get('islogin', None):
+        return redirect('/login/')
+    else:
+        number = request.session.get('number')
+        admin = models.Administrator.objects.filter(aId=number)
+        all_res = models.Restaurant.objects.all()
+        print("check")
+        if request.method == 'GET':
+            return render(request, 'delete_restaurant.html', context={'name': admin[0].aName, 'all_res': all_res})
+        else:
+            temp_id = request.POST.get('temp_id')
+            temp = all_res.filter(rId=temp_id).get()
+            if temp:
+                temp.delete()
+            return redirect('/delete_restaurant/')
 
 
 def user_submit(request):
@@ -313,36 +328,6 @@ def user_submit(request):
             else:
                 # messages.success(request, '所有信息不能为空')
                 return redirect('/user_edit/')
-
-
-def course_edit(request):
-    if not request.session.get('islogin', None):
-        return redirect('/login/')
-    else:
-        number = request.session.get('number')
-        user = models.user.objects.filter(number=number)
-        term_data = models.term.objects.filter(status='later')
-        next_term = ' '
-        for i in term_data:
-            next_term = i.name + i.id
-        opened_course = models.opened_course.objects.all()  # 当前学期开课表
-        if request.method == 'POST':  # 新增用户
-            id = request.POST.get('id')  # 不会与上文number冲突因为会重定向
-            credit = request.POST.get('credit')
-            name = request.POST.get('name')
-            teacher_number = request.POST.get('teacher_number')
-            teacher_name = request.POST.get('teacher_name')
-            if id and credit and name and teacher_number and teacher_name:
-                models.opened_course.objects.create(id=id, credit=credit, name=name, teacher_number=teacher_number,
-                                                    teacher_name=teacher_name)
-                return redirect('/course_edit/')
-            else:
-                # messages
-                return redirect('/course_edit')
-        else:  # 刷新、进入页面等非post
-            return render(request, 'course_edit.html', context={'name': user[0].name, 'number': number,
-                                                                'next_term': next_term,
-                                                                'opened_course': opened_course})
 
 
 def course_submit(request):

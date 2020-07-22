@@ -19,8 +19,8 @@ urlpatterns = [
     path('scores_submit/', views.scores_submit),
     path('restaurant_history/', views.restaurant_history),
     path('audit_restaurant/', views.audit_restaurant),
+    path('delete_restaurant/', views.delete_restaurant),
     path('user_submit/', views.user_submit),
-    path('course_edit/', views.course_edit),
     path('course_submit/', views.course_submit),
     path('term_edit/', views.term_edit),
 ]

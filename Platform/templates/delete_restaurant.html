@@ -25,7 +25,7 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="/index_manager/">SHU-manager</a>
+    <header class="app-header"><a class="app-header__logo" href="/index_manager/">Starving-admin</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -49,79 +49,79 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item" href="/user_edit/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">用户管理 Users Edit</span></a></li>
-        <li><a class="app-menu__item active" href="/course_edit/"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">课程管理 Courses Edit</span></a></li>
-        <li><a class="app-menu__item" href="/term_edit/"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">学期管理 Terms Edit</span></a></li>
-        </ul>
+        <li><a class="app-menu__item" href="/index_administrator/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">个人信息 Personal Data</span></a></li>
+        <li><a class="app-menu__item" href="/audit_restaurant/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">信息审核 Check Info</span></a></li>
+        <li><a class="app-menu__item" href="/delete_restaurant/"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">删除商家 Delete Restaurant</span></a></li>
+      </ul>
     </aside>
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1 style="font-size:20px">上海大学课程系统——{{next_term}}</h1>
+          <h3 class="tile-tile">餐厅信息 Restaurant Information</h3>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a style="font-size:13px;" href="#">课程管理 courses edit</a></li>
+          <li class="breadcrumb-item"><a style="font-size:13px;" href="#">删除商家 delete restaurant</a></li>
         </ul>
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
-            <h3 class="tile-tile">已开设课程 Opened Courses</h3>
             <div class="tile-body">
               <div class="table-responsive">
-                <table class="table table-hover table-bordered" id="sampleTable">
+                <form method="post">
+                  <table class="table table-hover table-bordered" id="sampleTable">
                   <thead>
                     <tr>
-                      <th>课程编号 Course Number</th>
-                      <th>课程学分 Course Credit</th>
-                      <th>课程名 Course Name</th>
-                      <th>教师编号 Teacher Number</th>
-                      <th>教师 Teacher Name</th>
+                      <th>餐厅名称 Restaurant Name</th>
+                      <th>餐厅地址 Restaurant Address</th>
+                      <th>联系电话 Restaurant Telephone</th>
+                      <th>电子邮件 Restaurant Email</th>
+                      <th>当月收益 Monthly Income</th>
                       <th>操作 Edit</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for item in opened_course %}
+                    {% for item in all_res %}
                     <tr>
-                      <td>{{item.id}}</td>
-                      <td>{{item.credit}}</td>
-                      <td>{{item.name}}</td>
-                      <td>{{item.teacher_number}}</td>
-                      <td>{{item.teacher_name}}</td>
+                      <td>{{item.rName}}</td>
+                      <td>{{item.rAddr}}</td>
+                      <td>{{item.rTel}}</td>
+                      <td>{{item.rEmail}}</td>
+                      <td>{{item.dysy}}</td>
                       <td>
-                        <a href="/course_submit/?courseid={{item.id}}&ope=1" style="padding:7px">编辑</a>
-                        <a href="/course_submit/?courseid={{item.id}}&ope=0" style="padding:7px">删除</a>
+                        <button class="btn btn-primary btn-block" name="temp_id" value={{item.rId}}><i class="fa fa-sign-in fa-lg fa-fw"></i>删除</button>
                       </td>
                     </tr>
                     {% endfor %}
                   </tbody>
                 </table>
+                </form>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-12">
-          <div class="tile">
-            <h3 class="tile-title">新增课程 Add Course</h3>
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <form method="POST">
-                      <input type="text" placeholder="课程编号 course number" name="id" style="margin:10px 30px 10px 15px;border-width: 3px 0px 0px 0px;width:160px"></input>
-                      <input type="text" placeholder="课程学分 course credit" name="credit" style="margin:10px 30px 10px 20px;border-width: 3px 0px 0px 0px;width:160px"></input>
-                      <input type="text" placeholder="课程名 course name" name="name" style="margin:10px 30px 10px 20px;border-width: 3px 0px 0px 0px;width:160px"></input>
-                      <input type="text" placeholder="教师编号 teacher number" name="teacher_number" style="margin:10px 30px 10px 20px;border-width: 3px 0px 0px 0px;width:160px"></input>
-                      <input type="text" placeholder="教师 teacher name" name="teacher_name" style="margin:10px 40px 10px 20px;border-width: 3px 0px 0px 0px;width:160px"></input>
-                      <button class="btn btn-primary"><i class="fa fa-fw fa-lg fa-check-circle"></i>提交 Submit</button>
-                    </form>
-                  </tr>
-                </thead>
-              </table>
-            </div>
-          </div>
-        </div>
+<!--        <div class="col-md-12">-->
+<!--          <div class="tile">-->
+<!--            <h3 class="tile-title">新增课程 Add Course</h3>-->
+<!--            <div class="table-responsive">-->
+<!--              <table class="table">-->
+<!--                <thead>-->
+<!--                  <tr>-->
+<!--                    <form method="POST">-->
+<!--                      <input type="text" placeholder="课程编号 course number" name="id" style="margin:10px 30px 10px 15px;border-width: 3px 0px 0px 0px;width:160px"></input>-->
+<!--                      <input type="text" placeholder="课程学分 course credit" name="credit" style="margin:10px 30px 10px 20px;border-width: 3px 0px 0px 0px;width:160px"></input>-->
+<!--                      <input type="text" placeholder="课程名 course name" name="name" style="margin:10px 30px 10px 20px;border-width: 3px 0px 0px 0px;width:160px"></input>-->
+<!--                      <input type="text" placeholder="教师编号 teacher number" name="teacher_number" style="margin:10px 30px 10px 20px;border-width: 3px 0px 0px 0px;width:160px"></input>-->
+<!--                      <input type="text" placeholder="教师 teacher name" name="teacher_name" style="margin:10px 40px 10px 20px;border-width: 3px 0px 0px 0px;width:160px"></input>-->
+<!--                      <button class="btn btn-primary"><i class="fa fa-fw fa-lg fa-check-circle"></i>提交 Submit</button>-->
+<!--                    </form>-->
+<!--                  </tr>-->
+<!--                </thead>-->
+<!--              </table>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </main>
     <!-- Essential javascripts for application to work-->
