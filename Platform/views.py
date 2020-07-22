@@ -209,7 +209,7 @@ def menu_submit(request):
             models.Menu.objects.filter(restaurantId_id=number).filter(mId=mid).update(mName=food_name)
             models.Menu.objects.filter(restaurantId_id=number).filter(mId=mid).update(price=food_price)
 
-            return redirect('/menu_edit/')
+            return redirect('/edit_menu/')
 
 
 def restaurant_history(request):
