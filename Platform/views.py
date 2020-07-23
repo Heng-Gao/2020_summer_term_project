@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
+from django.db.models import Count
+from django.forms.models import model_to_dict
 from Platform import models
 import datetime
 
+from numpy import *
+from numpy import linalg as la
 
 def login(request):
     if request.method == 'GET':
@@ -86,6 +90,97 @@ def index_administrator(request):
         return render(request, 'index_administrator.html', context={'name': admin[0].aName, 'gender': admin[0].aGender,
                                                                     'id': admin[0].aId, 'age': admin[0].aAge})
 
+def aitest(request):
+    userId = request.POST.get('useid')
+    result = models.Order.objects.filter(status = '已完成').order_by('userId')
+    matrixdata = []
+    for item in result:
+        transferitem = model_to_dict(item)
+        matrixdata.append([transferitem['userId'],transferitem['menuId'],transferitem['evaluation']])
+
+    def loadExData2():
+        return [[0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 5],
+                [0, 0, 0, 3, 0, 4, 0, 0, 0, 0, 3],
+                [0, 0, 0, 0, 4, 0, 0, 1, 0, 4, 0],
+                [3, 3, 4, 0, 0, 0, 0, 2, 2, 0, 0],
+                [5, 4, 5, 0, 0, 0, 0, 5, 5, 0, 0],
+                [0, 0, 0, 0, 5, 0, 1, 0, 0, 5, 0],
+                [4, 3, 4, 0, 0, 0, 0, 5, 5, 0, 1],
+                [0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 4],
+                [0, 0, 0, 2, 0, 2, 5, 0, 0, 1, 2],
+                [0, 0, 0, 0, 5, 0, 0, 0, 0, 4, 0],
+                [1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0]]
+
+    # 计算两个评分的欧氏距离
+    def esclidSim(inA, inB):
+        if len(inA) < 3:
+            return 1.0
+        return 1.0 / (1.0 + la.norm(inA - inB))
+
+    # 计算两个评分的 皮尔逊相关系数 (Pearson Correlation)
+    def pearsSim(inA, inB):
+        if len(inA) < 3:
+            return 1.0
+        return 0.5 + 0.5 * corrcoef(inA.inB)[0][1]
+
+    # 计算两个评分的余弦相似度 (Cosine similarity)
+    def cosSim(inA, inB):
+        num = float(inA.T * inB)
+        denom = la.norm(inA) * la.norm(inB)
+        return 0.5 + 0.5 * (num / denom)
+
+    # 基于物品的相似度推荐
+    def standEst(dataMat, user, sinMeas, item):
+        n = shape(dataMat)[1]
+        simTotal = 0.0;
+        ratsimTotal = 0.0
+        for j in range(n):
+            userRating = dataMat[user, j]
+            if userRating == 0:
+                continue
+            overLap = nonzero(logical_and(dataMat[:, item].A > 0, dataMat[:, j].A > 0))[0]
+            if len(overLap) == 0:
+                simility = 0
+            else:
+                simility = sinMeas(dataMat[overLap, item], dataMat[overLap, j])
+                print("the %d and %d similit is :%f" % (item, j, simility))
+            simTotal += simility
+            ratsimTotal += simility * userRating
+        if simTotal == 0:
+            return 0
+        else:
+            return ratsimTotal / simTotal
+
+    def recommand(dataMat, user, n=3, simMeans=cosSim, estMethod=standEst):
+        unratedItems = nonzero(dataMat[user, :].A == 0)[1]
+        if len(unratedItems) == 0:
+            return "you rated everything"
+        itemScores = []
+        for item in unratedItems:
+            estimatscore = estMethod(dataMat, user, simMeans, item)
+            itemScores.append((item, estimatscore))
+        return sorted(itemScores, key=lambda jj: jj[1], reverse=True)[:n]
+
+    myMat = mat(loadExData2())
+    print(recommand(myMat, 1))
+    return HttpResponse(matrixdata)
+
+def recommand(request):
+    if not request.session.get('islogin', None):
+        return redirect('/login/')
+    else:
+        number = request.session.get('number')
+        user = models.User.objects.filter(uId=number)
+        recommandations = models.Order.objects.filter(userId = number,status = '已完成').values('menuId').annotate(au=Count('menuId')).order_by('-au')
+        recommandmenu1 = []
+        recommandmenu2 = []
+        for item in recommandations:
+            Object = model_to_dict(models.Menu.objects.get(mId = item['menuId']))
+            recommandmenu1.append(Object)
+        recommandmenu1 = recommandmenu1[0:6]
+    return render(request, 'recommand.html',
+                  context={'name': user[0].uName, 'number': number,
+                            'recommandations': recommandmenu1 ,'AIrecommandations': recommandmenu2})
 
 def history(request):
     if not request.session.get('islogin', None):

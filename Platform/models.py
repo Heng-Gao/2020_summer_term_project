@@ -42,6 +42,7 @@ class Order(models.Model):
     status = models.CharField(max_length=10, blank=True)
     userId = models.ForeignKey(to="User", on_delete=models.CASCADE)
     menuId = models.ForeignKey(to="Menu", on_delete=models.CASCADE)
+    evaluation = models.CharField(max_length=3, null=True)
 
 
 class TmpRestaurant(models.Model):
