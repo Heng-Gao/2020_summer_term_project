@@ -15,6 +15,7 @@ urlpatterns = [
     path('current/', views.current),
     path('handle_current/', views.handle_current),
     path('logout/', views.logout),
+    path('new_activities/', views.new_activities),
     path('edit_menu/', views.edit_menu),
     path('menu_submit/', views.menu_submit),
     path('restaurant_history/', views.restaurant_history),

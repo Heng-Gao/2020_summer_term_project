@@ -161,6 +161,19 @@ def handle_current(request):
             return redirect('/handle_current/')
 
 
+def new_activities(request):
+    if not request.session.get('islogin', None):
+        return redirect('/login/')
+    else:
+        number = request.session.get('number')
+        restaurant = models.Restaurant.objects.filter(rId=number)
+        order = models.Order.objects.filter()
+
+        return render(request, 'new_activities.html', context={'name': restaurant[0].rName, 'number': number,
+                                                                   'order': order})
+
+
+
 def edit_menu(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')

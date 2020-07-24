@@ -14,7 +14,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>商户端</title>
+    <title>修改菜谱</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,7 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="/index_teacher/">takeaway-platform</a>
+    <header class="app-header"><a class="app-header__logo" href="/index_student/">takeaway-platform</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -42,13 +42,13 @@
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
       <div class="app-sidebar__user">
-        <img style="height:45px;margin-right:30px;" src="{% static "images/teacher.jpg" %}" alt="User Image">
+        <img style="height:45px;margin-right:30px;" src="{% static "images/student.jpg" %}" alt="User Image">
         <div>
-          <p class="app-sidebar__user-name">欢迎您：{{name}}</p>
-          <p class="app-sidebar__user-designation">商户号：{{id}}</p>
+          <p class="app-sidebar__user-name">VIP客户：{{name}}</p>
+          <p class="app-sidebar__user-designation">用户号：{{number}}</p>
         </div>
       </div>
-      <ul class="app-menu">
+        <ul class="app-menu">
         <li><a class="app-menu__item" href="/handle_current/"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">处理当前订单</span></a></li>
         <li><a class="app-menu__item" href="/edit_menu/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">修改菜谱</span></a></li>
         <li><a class="app-menu__item" href="/new_activities"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">新建活动</span></a></li>
@@ -58,41 +58,47 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1 style="font-size:20px">饥肠辘辘外卖平台</h1>
+          <h1 style="font-size:20px">欢迎您：{{name}}</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a style="font-size:13px;" href="#">商户信息</a></li>
+          <li class="breadcrumb-item"><a style="font-size:13px;" href="#">查看当前订单</a></li>
         </ul>
       </div>
-      <div class="clearfix"></div>
-      <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
           <div class="tile">
-            <h3 class="tile-title">商户信息</h3>
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
+            <div class="tile-body">
+              <div class="table-responsive">
+                <table class="table table-hover table-bordered" id="sampleTable">
+                  <thead>
+                    <tr>
+                        <th>菜号</th>
+                      <th>菜名</th>
+                      <th>单价</th>
+                        <th>描述</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in order %}
+                    <tr>
+                      <td>{{item.menuId.restaurantId.rName}}</td>
+                      <td>{{item.oId}}</td>
+                      <td>{{item.oTime}}</td>
+                      <td>{{item.userId.uName}}</td>
+                      <td>{{item.menuId.mName}}</td>
+                      <td>{{item.number}}</td>
+                      <td>{{item.money}}</td>
 
-                    <th>名字</th>
-                    <th>地址</th>
-                    <th>联系电话</th>
-                    <th>当月收益</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-
-                    <th>{{name}}</th>
-                    <th>{{addr}}</th>
-                    <th>{{tel}}</th>
-                    <th>{{dysy}}</th>
-                  </tr>
-                </tbody>
-              </table>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
+      </div>
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
@@ -102,7 +108,10 @@
     <!-- The javascript plugin to display page loading on top-->
     <script src="{% static "js/plugins/pace.min.js"%}"></script>
     <!-- Page specific javascripts-->
-    <script type="text/javascript" src="{% static "js/plugins/chart.js" %}"></script>
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="{% static "js/plugins/jquery.dataTables.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/plugins/dataTables.bootstrap.min.js" %}"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
     <!-- Google analytics script-->
     <script type="text/javascript">
       if(document.location.hostname == 'pratikborsadiya.in') {
@@ -113,6 +122,7 @@
       	ga('create', 'UA-72504830-1', 'auto');
       	ga('send', 'pageview');
       }
+
     </script>
   </body>
 </html>
