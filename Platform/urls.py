@@ -11,6 +11,7 @@ urlpatterns = [
     path('index_restaurant/', views.index_restaurant),
     path('index_administrator/', views.index_administrator),
     path('history/', views.history),
+    path('recommand/', views.recommand),
     path('reserve/', views.reserve),
     path('current/', views.current),
     path('handle_current/', views.handle_current),
@@ -20,5 +21,6 @@ urlpatterns = [
     path('menu_submit/', views.menu_submit),
     path('restaurant_history/', views.restaurant_history),
     path('audit_restaurant/', views.audit_restaurant),
-    path('delete_restaurant/', views.delete_restaurant)
+    path('delete_restaurant/', views.delete_restaurant),
+    path('algorithm/',views.aitest)
 ]
