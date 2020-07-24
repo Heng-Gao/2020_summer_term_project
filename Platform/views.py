@@ -37,7 +37,9 @@ def login(request):
         # 账号或密码不存在
         else:
             messages.success(request, "账号或密码不能为空")
+            print("fff")
             return render(request, 'login.html')
+
 
 
 def logout(request):
