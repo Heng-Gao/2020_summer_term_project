@@ -92,26 +92,24 @@ def index_administrator(request):
         return render(request, 'index_administrator.html', context={'name': admin[0].aName, 'gender': admin[0].aGender,
                                                                     'id': admin[0].aId, 'age': admin[0].aAge})
 
-def aitest(request):
-    userId = request.POST.get('useid')
+def aitest(number):
+    userId = number
     result = models.Order.objects.filter(status = '已完成').order_by('userId')
-    matrixdata = []
+    menus = models.Menu.objects.values_list('mId', flat=True)
+    users = models.User.objects.values_list('uId', flat=True)
+    menus_number = len(menus)
+    users_number = len(users)
+    matrixdata = [[0]*menus_number for i in range(users_number)]
+    response = []
     for item in result:
         transferitem = model_to_dict(item)
-        matrixdata.append([transferitem['userId'],transferitem['menuId'],transferitem['evaluation']])
+        a = list(menus).index(transferitem['menuId'])
+        b = list(users).index(transferitem['userId'])
+        matrixdata[b][a] = int(transferitem['evaluation'])
+        # matrixdata.append([transferitem['userId'],transferitem['menuId'],transferitem['evaluation']])
 
     def loadExData2():
-        return [[0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 5],
-                [0, 0, 0, 3, 0, 4, 0, 0, 0, 0, 3],
-                [0, 0, 0, 0, 4, 0, 0, 1, 0, 4, 0],
-                [3, 3, 4, 0, 0, 0, 0, 2, 2, 0, 0],
-                [5, 4, 5, 0, 0, 0, 0, 5, 5, 0, 0],
-                [0, 0, 0, 0, 5, 0, 1, 0, 0, 5, 0],
-                [4, 3, 4, 0, 0, 0, 0, 5, 5, 0, 1],
-                [0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 4],
-                [0, 0, 0, 2, 0, 2, 5, 0, 0, 1, 2],
-                [0, 0, 0, 0, 5, 0, 0, 0, 0, 4, 0],
-                [1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0]]
+        return matrixdata
 
     # 计算两个评分的欧氏距离
     def esclidSim(inA, inB):
@@ -164,8 +162,12 @@ def aitest(request):
         return sorted(itemScores, key=lambda jj: jj[1], reverse=True)[:n]
 
     myMat = mat(loadExData2())
-    print(recommand(myMat, 1))
-    return HttpResponse(matrixdata)
+    recomaandations = recommand(myMat, 1)
+    for item in recomaandations:
+        index = list(menus)[item[0]]
+        element = models.Menu.objects.get(mId = index)
+        response.append(model_to_dict(element))
+    return response
 
 def recommand(request):
     if not request.session.get('islogin', None):
@@ -175,7 +177,7 @@ def recommand(request):
         user = models.User.objects.filter(uId=number)
         recommandations = models.Order.objects.filter(userId = number,status = '已完成').values('menuId').annotate(au=Count('menuId')).order_by('-au')
         recommandmenu1 = []
-        recommandmenu2 = []
+        recommandmenu2 = aitest(number)
         for item in recommandations:
             Object = model_to_dict(models.Menu.objects.get(mId = item['menuId']))
             recommandmenu1.append(Object)
