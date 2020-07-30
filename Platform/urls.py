@@ -12,6 +12,7 @@ urlpatterns = [
     path('index_administrator/', views.index_administrator),
     path('history/', views.history),
     path('recommand/', views.recommand),
+    path('restaurant_entrance/', views.restaurant_entrance),
     path('reserve/', views.reserve),
     path('current/', views.current),
     path('handle_current/', views.handle_current),

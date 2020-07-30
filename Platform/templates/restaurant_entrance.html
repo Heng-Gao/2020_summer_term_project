@@ -14,7 +14,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>菜品分类</title>
+    <title>商家入口</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +50,7 @@
       </div>
       <ul class="app-menu">
         <li><a class="app-menu__item" href="/recommand/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">菜品推荐</span></a></li>
-        <li><a class="app-menu__item active" href="/restaurant_entrance/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">商品下单</span></a></li>
+        <li><a class="app-menu__item active" href="/restaurant_entrance/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">查看商家</span></a></li>
         <li><a class="app-menu__item" href="/current/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">当前订单</span></a></li>
         <li><a class="app-menu__item" href="/history/"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">历史订单</span></a></li>
         </ul>
@@ -58,68 +58,39 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1 style="font-size:20px">餐厅——{{rName}}</h1>
+          <h1 style="font-size:20px">欢迎您：{{name}}</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item"><a style="font-size:13px;" href="#">菜品下单</a></li>
+          <li class="breadcrumb-item"><a style="font-size:13px;" href="#">商家列表</a></li>
         </ul>
       </div>
       <div class="row">
-        <div class="col-md-12">
-          <div class="tile">
-          <h3 class="tile-tile">菜品一览</h3>
-            <div class="tile-body">
-              <div class="table-responsive">
-                <table class="table table-hover table-bordered" id="sampleTable1">
-                  <thead>
-                    <tr>
-                      <th>菜名</th>
-                      <th>单价</th>
-                      <th>菜品描述</th>
-                      <th>实物图</th>
-                      <th>下单数量</th>
-                    </tr>
-                  </thead>
-                  <tbody align="center">
-                    {% for item in menu %}
-                    <tr>
-                      <td>{{item.mName}}</td>
-                      <td class="food_price">{{item.price}}</td>
-                      <td width="300">{{item.infor}}</td>
-                      <td><img height="160" width="240" src="/static/images/{{item.image}}" %}"></td>
-                      <td>
-                        <a href="javascript:" class="sub" >-</a>
-                        <input type="text" class="quea" value="0">
-                        <a href="javascript:" class="add">+</a>
-                      </td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
 <!--        <div class="col-md-12">-->
 <!--          <div class="tile">-->
-<!--          <h3 class="tile-tile">老字号店铺</h3>-->
+<!--          <h3 class="tile-tile">菜品一览</h3>-->
 <!--            <div class="tile-body">-->
 <!--              <div class="table-responsive">-->
-<!--                <table class="table table-hover table-bordered" id="sampleTable2">-->
+<!--                <table class="table table-hover table-bordered" id="sampleTable1">-->
 <!--                  <thead>-->
 <!--                    <tr>-->
+<!--                      <th>菜号</th>-->
+<!--                      <th>菜名</th>-->
+<!--                      <th>单价</th>-->
 <!--                      <th>餐馆</th>-->
-<!--                      <th>商家地址</th>-->
-<!--                      <th>联系电话</th>-->
+<!--                      <th>菜品描述</th>-->
+<!--                      <th>实物图</th>-->
 <!--                    </tr>-->
 <!--                  </thead>-->
-<!--                  <tbody>-->
-<!--                    {% for item in restaurant %}-->
-<!--                    <tr href="">-->
-<!--                      <td>{{item.rName}}</td>-->
-<!--                      <td>{{item.rAddr}}</td>-->
-<!--                      <td>{{item.rTel}}</td>-->
+<!--                  <tbody align="center">-->
+<!--                    {% for item in menu %}-->
+<!--                    <tr>-->
+<!--                      <td>{{item.mId}}</td>-->
+<!--                      <td>{{item.mName}}</td>-->
+<!--                      <td>{{item.price}}</td>-->
+<!--                      <td>{{item.restaurantId.rName}}</td>-->
+<!--                      <td width="300">{{item.infor}}</td>-->
+<!--                      <td><img height="160" width="240" src="/static/images/{{item.image}}" %}"></td>-->
 <!--                    </tr>-->
 <!--                    {% endfor %}-->
 <!--                  </tbody>-->
@@ -128,6 +99,35 @@
 <!--            </div>-->
 <!--          </div>-->
 <!--        </div>-->
+        <div class="col-md-12">
+          <div class="tile">
+          <h3 class="tile-tile">老字号店铺</h3>
+            <div class="tile-body">
+              <div class="table-responsive">
+                <table class="table table-hover table-bordered" id="sampleTable2">
+                  <thead>
+                    <tr>
+                      <th>餐馆</th>
+                      <th>商家地址</th>
+                      <th>联系电话</th>
+                      <th>入口</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in restaurant %}
+                    <tr>
+                      <td>{{item.rName}}</td>
+                      <td>{{item.rAddr}}</td>
+                      <td>{{item.rTel}}</td>
+                      <td><a  href="/reserve/?rId={{item.rId}}">进入商家</a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
 <!--        <div class="col-md-12">-->
 <!--          <div class="tile">-->
 <!--            <h3 class="tile-title">点单</h3>-->
@@ -171,15 +171,6 @@
     <script type="text/javascript" src="{% static "js/plugins/dataTables.bootstrap.min.js" %}"></script>
     <script type="text/javascript">$('#sampleTable1').DataTable();</script>
     <script type="text/javascript">$('#sampleTable2').DataTable();</script>
-<!--    <script type="text/javascript">-->
-<!--      function updateamount() {-->
-<!--        price=$('.food_price').text()-->
-<!--        count=$('.quea').text()-->
-<!--        price=parseFloat(price)-->
-<!--        count=parseInt(count)-->
-<!--        amount=price*cou-->
-<!--      }-->
-<!--    </script>-->
     <!-- Google analytics script-->
     <script type="text/javascript">
       if(document.location.hostname == 'pratikborsadiya.in') {

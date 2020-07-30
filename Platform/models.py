@@ -16,7 +16,7 @@ class Restaurant(models.Model):
     rAddr = models.CharField(max_length=2)
     rTel = models.CharField(max_length=15)
     rEmail = models.EmailField()
-    dysy = models.IntegerField(default=0)
+    dysy = models.IntegerField(default=0)#月营业额
 
 
 class Administrator(models.Model):
@@ -32,6 +32,8 @@ class Menu(models.Model):
     mName = models.CharField(max_length=15)
     price = models.IntegerField()
     restaurantId = models.ForeignKey(to="Restaurant", on_delete=models.CASCADE)
+    image = models.ImageField()  # 格式：'p'+mId+照片后缀,同图片文件名,比例统一为3：2
+    infor = models.CharField(max_length=100)  # 菜品描述，不得多于100字（商户上传菜品时验证）
 
 
 class Order(models.Model):

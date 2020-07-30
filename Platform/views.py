@@ -8,6 +8,7 @@ import datetime
 from numpy import *
 from numpy import linalg as la
 
+
 def login(request):
     if request.method == 'GET':
         return render(request, 'login.html')
@@ -39,7 +40,6 @@ def login(request):
             messages.success(request, "账号或密码不能为空")
             print("fff")
             return render(request, 'login.html')
-
 
 
 def logout(request):
@@ -92,14 +92,15 @@ def index_administrator(request):
         return render(request, 'index_administrator.html', context={'name': admin[0].aName, 'gender': admin[0].aGender,
                                                                     'id': admin[0].aId, 'age': admin[0].aAge})
 
+
 def aitest(number):
     userId = number
-    result = models.Order.objects.filter(status = '已完成').order_by('userId')
+    result = models.Order.objects.filter(status='已完成').order_by('userId')
     menus = models.Menu.objects.values_list('mId', flat=True)
     users = models.User.objects.values_list('uId', flat=True)
     menus_number = len(menus)
     users_number = len(users)
-    matrixdata = [[0]*menus_number for i in range(users_number)]
+    matrixdata = [[0] * menus_number for i in range(users_number)]
     response = []
     for item in result:
         transferitem = model_to_dict(item)
@@ -165,9 +166,10 @@ def aitest(number):
     recomaandations = recommand(myMat, 1)
     for item in recomaandations:
         index = list(menus)[item[0]]
-        element = models.Menu.objects.get(mId = index)
+        element = models.Menu.objects.get(mId=index)
         response.append(model_to_dict(element))
     return response
+
 
 def recommand(request):
     if not request.session.get('islogin', None):
@@ -175,16 +177,18 @@ def recommand(request):
     else:
         number = request.session.get('number')
         user = models.User.objects.filter(uId=number)
-        recommandations = models.Order.objects.filter(userId = number,status = '已完成').values('menuId').annotate(au=Count('menuId')).order_by('-au')
+        recommandations = models.Order.objects.filter(userId=number, status='已完成').values('menuId').annotate(
+            au=Count('menuId')).order_by('-au')
         recommandmenu1 = []
         recommandmenu2 = aitest(number)
         for item in recommandations:
-            Object = model_to_dict(models.Menu.objects.get(mId = item['menuId']))
+            Object = model_to_dict(models.Menu.objects.get(mId=item['menuId']))
             recommandmenu1.append(Object)
         recommandmenu1 = recommandmenu1[0:6]
     return render(request, 'recommand.html',
                   context={'name': user[0].uName, 'number': number,
-                            'recommandations': recommandmenu1 ,'AIrecommandations': recommandmenu2})
+                           'recommandations': recommandmenu1, 'AIrecommandations': recommandmenu2})
+
 
 def history(request):
     if not request.session.get('islogin', None):
@@ -197,7 +201,7 @@ def history(request):
                                                         'order': order})
 
 
-def reserve(request):
+def restaurant_entrance(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
@@ -207,21 +211,26 @@ def reserve(request):
         restaurant = models.Restaurant.objects.all()
 
         if request.method == 'GET':
-            return render(request, 'reserve.html',
+            return render(request, 'restaurant_entrance.html',
                           context={'name': user[0].uName, 'number': number, 'menu': menu,
                                    'restaurant': restaurant})
-        else:
-            mid = request.POST.get('mId')
-            count = request.POST.get('count')
-            menu = models.Menu.objects.filter(mId=mid)
-            price = int(menu[0].price) * int(count)
-            str = '%d' % price
-            messages.success(request, "应付款" + str)
-            time = datetime.datetime.now()
-            models.Order.objects.create(oTime=time, number=count, money=price,
-                                        menuId_id=mid, userId_id=number, status='处理中')
-            messages.success(request, '下单成功')
-            return redirect('/reserve/')
+
+
+def reserve(request):
+    if not request.session.get('islogin', None):
+        return redirect('/login/')
+    else:
+        number = request.session.get('number')
+        user = models.User.objects.filter(uId=number)
+        if request.method == 'GET':
+            rId = request.GET.get('rId')
+            rName = models.Restaurant.objects.filter(rId=rId)
+            for i in rName:
+                temp = i.rName
+            rName = temp
+            menu = models.Menu.objects.filter(restaurantId=rId)
+            return render(request, 'reserve.html',
+                          context={'name': user[0].uName, 'number': number, 'menu': menu, 'rName': rName})
 
 
 def current(request):
@@ -269,8 +278,7 @@ def new_activities(request):
         order = models.Order.objects.filter()
 
         return render(request, 'new_activities.html', context={'name': restaurant[0].rName, 'number': number,
-                                                                   'order': order})
-
+                                                               'order': order})
 
 
 def edit_menu(request):
@@ -286,17 +294,17 @@ def edit_menu(request):
             student_data = models.Menu.objects.filter(mName=cname)
             return render(request, 'edit_menu.html', context={'name': user[0].rName, 'number': number,
 
-                                                                'courses_data': courses_data,
-                                                                'student_data': student_data,
-                                                                'course_name': cname})
+                                                              'courses_data': courses_data,
+                                                              'student_data': student_data,
+                                                              'course_name': cname})
         else:
             cname = '未选中菜'
             student_data = courses_data
             return render(request, 'edit_menu.html', context={'name': user[0].rName, 'number': number,
 
-                                                                'courses_data': courses_data,
-                                                                'student_data': student_data,
-                                                                'course_name': cname})
+                                                              'courses_data': courses_data,
+                                                              'student_data': student_data,
+                                                              'course_name': cname})
 
 
 def menu_submit(request):
@@ -400,8 +408,6 @@ def delete_restaurant(request):
             if temp:
                 temp.delete()
             return redirect('/delete_restaurant/')
-
-
 
 
 def user_register(request):
