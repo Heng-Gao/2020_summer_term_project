@@ -53,7 +53,7 @@ def index(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
-        user = models.user.objects.filter(number=request.session.get('number'))
+        user = models.User.objects.filter(number=request.session.get('number'))
         if user[0].usertype == '学生':
             return redirect('/index_student/')
         elif user[0].usertype == '教师':

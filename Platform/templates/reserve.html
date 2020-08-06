@@ -90,7 +90,7 @@
                       <td><img height="160" width="240" src="/static/images/{{item.image}}" %}"></td>
                       <td>
                         <a href="javascript:" class="sub" >-</a>
-                        <input type="text" class="quea" value="0">
+                        <input type="text" class="num" mid="{{item.mId}}" value="0">
                         <a href="javascript:" class="add">+</a>
                       </td>
                     </tr>
@@ -172,13 +172,9 @@
     <script type="text/javascript">$('#sampleTable1').DataTable();</script>
     <script type="text/javascript">$('#sampleTable2').DataTable();</script>
 <!--    <script type="text/javascript">-->
-<!--      function updateamount() {-->
-<!--        price=$('.food_price').text()-->
-<!--        count=$('.quea').text()-->
-<!--        price=parseFloat(price)-->
-<!--        count=parseInt(count)-->
-<!--        amount=price*cou-->
-<!--      }-->
+<!--      $('.add').click(function () {-->
+<!--        count=$(this).next().val()-->
+<!--      })-->
 <!--    </script>-->
     <!-- Google analytics script-->
     <script type="text/javascript">

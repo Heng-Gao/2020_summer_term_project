@@ -16,7 +16,7 @@ class Restaurant(models.Model):
     rAddr = models.CharField(max_length=2)
     rTel = models.CharField(max_length=15)
     rEmail = models.EmailField()
-    dysy = models.IntegerField(default=0)#月营业额
+    dysy = models.IntegerField(default=0)  # 月营业额
 
 
 class Administrator(models.Model):
@@ -56,3 +56,9 @@ class TmpRestaurant(models.Model):
     t_status = models.IntegerField(default=1)
 
 
+class Activity(models.Model):
+    name = models.CharField(max_length=15)
+    start = models.CharField(max_length=15)
+    end = models.CharField(max_length=15)
+    discount = models.IntegerField()
+    restaurantId = models.ForeignKey(to="Restaurant", on_delete=models.CASCADE)
