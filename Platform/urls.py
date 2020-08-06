@@ -1,5 +1,7 @@
 from django.urls import path
 from Platform import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('', views.index),
@@ -18,10 +20,12 @@ urlpatterns = [
     path('handle_current/', views.handle_current),
     path('logout/', views.logout),
     path('new_activities/', views.new_activities),
+    path('activities_submit/', views.activities_submit),
     path('edit_menu/', views.edit_menu),
     path('menu_submit/', views.menu_submit),
+    path('menu_add/', views.menu_add),
     path('restaurant_history/', views.restaurant_history),
     path('audit_restaurant/', views.audit_restaurant),
     path('delete_restaurant/', views.delete_restaurant),
     path('algorithm/',views.aitest)
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

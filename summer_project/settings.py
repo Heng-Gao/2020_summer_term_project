@@ -126,6 +126,9 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "Platform/templates/static"),
 )
 
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'Platform/templates/static/images').replace('\\', '/')
+
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'  # 引擎
 SESSION_CACHE_ALIAS = 'default'  # 使用的缓存别名（默认内存缓存，也可以是memcache），此处别名依赖缓存的设置
 

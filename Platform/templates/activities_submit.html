@@ -14,7 +14,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>查看当前订单</title>
+    <title>修改菜谱</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,7 +48,7 @@
           <p class="app-sidebar__user-designation">用户号：{{number}}</p>
         </div>
       </div>
-       <ul class="app-menu">
+        <ul class="app-menu">
         <li><a class="app-menu__item" href="/handle_current/"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">处理当前订单</span></a></li>
         <li><a class="app-menu__item" href="/edit_menu/"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">修改菜谱</span></a></li>
         <li><a class="app-menu__item" href="/new_activities"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">新建活动</span></a></li>
@@ -70,36 +70,19 @@
           <div class="tile">
             <div class="tile-body">
               <div class="table-responsive">
-                <table class="table table-hover table-bordered" id="sampleTable">
-                  <thead>
-                    <tr>
-                      <th>商家</th>
-                      <th>订单号</th>
-                      <th>下单时间</th>
-                      <th>用户</th>
-                      <th>套餐</th>
-                      <th>数量</th>
-                      <th>金额</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for item in order %}
+                  <form method="POST">
+                          <br><a>活动名称：</a>
+                           <input type="text" placeholder="促销"  name="name" style="margin:10px 10px 10px 10px;width:90px"></input></br>
+                          <br><a>优惠折扣：</a>
+                           <input type="text" placeholder="8" name="discount" style="margin:10px 10px 10px 10px;width:90px"></input></br>
+                          <br><a>开始日期：</a>
+                          <input type="text" placeholder="xxxx-xx-xx"  name="start" style="margin:10px 10px 10px 10px;width:90px"></input></br>
+                          <br><a>结束日期：</a>
+                           <input type="text" placeholder="xxxx-xx-xx"  name="end" style="margin:10px 10px 10px 10px;width:90px"></input></br>
 
-                    {% ifequal item.menuId.restaurantId.rName name %}
-                    <tr>
-                      <td>{{item.menuId.restaurantId.rName}}</td>
-                      <td>{{item.oId}}</td>
-                      <td>{{item.oTime}}</td>
-                      <td>{{item.userId.uName}}</td>
-                      <td>{{item.menuId.mName}}</td>
-                      <td>{{item.number}}</td>
-                      <td>{{item.money}}</td>
+                          <br><button class="btn btn-primary"><i class="fa fa-fw fa-lg fa-check-circle"></i>完成 Submit</button></br>
 
-                    </tr>
-                    {% endifequal %}
-                    {% endfor %}
-                  </tbody>
-                </table>
+                  </form>
               </div>
             </div>
           </div>

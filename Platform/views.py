@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.db.models import Count
 from django.forms.models import model_to_dict
 from Platform import models
+from django.db.models import F
 import datetime
 
 from numpy import *
@@ -264,7 +265,12 @@ def handle_current(request):
                                                                       'order': order})
         else:
             courseid_deleted = request.POST.get('id')
+            order = models.Order.objects.filter(oId=courseid_deleted)
+            money = order[0].money
+            rid = order[0].menuId.restaurantId.rId
             models.Order.objects.filter(oId=courseid_deleted).update(status='已完成')
+            models.Order.objects.filter(oId=courseid_deleted).update(status='已完成')
+            models.Restaurant.objects.filter(rId=rid).update(dysy=F('dysy') + money)
             messages.success(request, '订单已发货！')
             return redirect('/handle_current/')
 
@@ -275,36 +281,69 @@ def new_activities(request):
     else:
         number = request.session.get('number')
         restaurant = models.Restaurant.objects.filter(rId=number)
-        order = models.Order.objects.filter()
+        activities = models.Activity.objects.filter(restaurantId=number)
+        if request.method == 'GET':
+            return render(request, 'new_activities.html', context={'activities': activities})
+        else:
+            # discount = request.POST.get('discount')
+            # d = int(discount)
+            # print(d)
+            # models.Menu.objects.filter(restaurantId=number).update(price=F('price') * d / 10)
+            # messages.success(request, '新建成功！')
 
-        return render(request, 'new_activities.html', context={'name': restaurant[0].rName, 'number': number,
-                                                               'order': order})
+            # restaurantId = request.POST.get('restaurantId')
+            return redirect('/activities_submit/')
+
+
+def activities_submit(request):
+    if not request.session.get('islogin', None):
+        return redirect('/login/')
+    else:
+        number = request.session.get('number')
+        restaurant = models.Restaurant.objects.filter(rId=number)
+        if request.method == 'GET':
+            return render(request, 'activities_submit.html',
+                          context={'restaurantId': number})
+        else:
+            restaurant_Id = number
+            name = request.POST.get('name')
+            start = request.POST.get('start')
+            end = request.POST.get('end')
+            discount = request.POST.get('discount')
+            d = int(discount)
+
+            new_Activity = models.Activity()
+            new_Activity.name = name
+            new_Activity.start = start
+            new_Activity.end = end
+            new_Activity.discount = discount
+            new_Activity.restaurantId = restaurant[0]
+            new_Activity.save()
+
+            models.Menu.objects.filter(restaurantId=restaurant_Id).update(price=F('price')*d/10)
+            messages.success(request, '新建成功！')
+            return redirect('/new_activities/')
 
 
 def edit_menu(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
-        cname = request.GET.get('course_name')
         number = request.session.get('number')
-        user = models.Restaurant.objects.filter(rId=number)
+        menu = models.Menu.objects.filter(restaurantId=number)
 
-        courses_data = models.Menu.objects.filter(restaurantId_id=number)
-        if cname:
-            student_data = models.Menu.objects.filter(mName=cname)
-            return render(request, 'edit_menu.html', context={'name': user[0].rName, 'number': number,
-
-                                                              'courses_data': courses_data,
-                                                              'student_data': student_data,
-                                                              'course_name': cname})
+        if request.method == 'GET':
+            return render(request, 'edit_menu.html', context={'menu': menu})
         else:
-            cname = '未选中菜'
-            student_data = courses_data
-            return render(request, 'edit_menu.html', context={'name': user[0].rName, 'number': number,
-
-                                                              'courses_data': courses_data,
-                                                              'student_data': student_data,
-                                                              'course_name': cname})
+            if 'delete' in request.POST:
+                temp_id = request.POST.get('delete')
+                models.Menu.objects.filter(mId=temp_id).first().delete()
+                messages.success(request, '删除成功！')
+                return redirect('/edit_menu/')
+            else:
+                temp_id = request.POST.get('temp_id')
+                temp = models.Menu.objects.filter(mId=temp_id)
+                return redirect('/menu_submit/?temp_id='+temp_id)
 
 
 def menu_submit(request):
@@ -312,22 +351,62 @@ def menu_submit(request):
         return redirect('/login/')
     else:
         number = request.session.get('number')
-        user = models.Restaurant.objects.filter(rId=number)
+        restaurant = models.Restaurant.objects.filter(rId=number)
 
         if request.method == 'GET':
-            mid = request.GET.get('mid')
-            mName = request.GET.get('mName')
-            price = request.GET.get('price')
-
+            temp_id = request.GET.get('temp_id')
+            menu_id = temp_id
+            temp = models.Menu.objects.filter(mId=temp_id)
+            print(menu_id)
             return render(request, 'menu_submit.html',
-                          context={'number': number, 'mName': mName, 'price': price, 'mid': mid})
+                          context={'temp': temp})
         else:
-            mid = request.POST.get('mid')
-            food_name = request.POST.get('food_name')
-            food_price = request.POST.get('food_price')
+            temp_id = request.POST.get('temp_id')
+            name = request.POST.get('name')
+            price = request.POST.get('price')
+            image = request.FILES.get('image')
+            infor = request.POST.get('infor')
 
-            models.Menu.objects.filter(restaurantId_id=number).filter(mId=mid).update(mName=food_name)
-            models.Menu.objects.filter(restaurantId_id=number).filter(mId=mid).update(price=food_price)
+            menu_id = request.POST.get('menu_id')
+            models.Menu.objects.filter(mId=menu_id).first().delete()
+
+            new_Menu = models.Menu()
+            new_Menu.mId = temp_id
+            new_Menu.mName = name
+            new_Menu.price = price
+            new_Menu.restaurantId = restaurant[0]
+            new_Menu.image = image
+            new_Menu.infor = infor
+            new_Menu.save()
+
+            return redirect('/edit_menu/')
+
+
+def menu_add(request):
+    if not request.session.get('islogin', None):
+        return redirect('/login/')
+    else:
+        number = request.session.get('number')
+        restaurant = models.Restaurant.objects.filter(rId=number)
+        if request.method == 'GET':
+            return render(request, 'menu_add.html',
+                          context={})
+        else:
+            temp_id = request.POST.get('mid')
+            name = request.POST.get('name')
+            price = request.POST.get('price')
+            image = request.FILES.get('image')
+            infor = request.POST.get('infor')
+
+            new_Menu = models.Menu()
+            new_Menu.mId = temp_id
+            new_Menu.mName = name
+            new_Menu.price = price
+            new_Menu.restaurantId = restaurant[0]
+            new_Menu.image = image
+            new_Menu.infor = infor
+            new_Menu.save()
+
 
             return redirect('/edit_menu/')
 

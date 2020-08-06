@@ -80,13 +80,21 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for item in order %}
+                    {% for item in activities %}
                     <tr>
-
+                      <th>{{item.name}}</th>
+                      <th>{{item.discount}}</th>
+                      <th>{{item.start}}</th>
+                      <th>{{item.end}}</th>
                     </tr>
                     {% endfor %}
                   </tbody>
                 </table>
+                   <form method="post">
+                     <br>
+                     <button class="btn btn-primary btn-block" name="restaurantId" value={{number}}><i class="fa fa-sign-in fa-lg fa-fw"></i>新建活动</button>
+                     <br>
+                  </form>
               </div>
             </div>
           </div>

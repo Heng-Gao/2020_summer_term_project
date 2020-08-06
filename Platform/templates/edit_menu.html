@@ -70,30 +70,35 @@
           <div class="tile">
             <div class="tile-body">
               <div class="table-responsive">
+                <a  href="/menu_add/">添加</a>
+                <form method="post">
                 <table class="table table-hover table-bordered" id="sampleTable">
                   <thead>
                     <tr>
-                        <th>菜号</th>
+                      <th>菜号</th>
                       <th>菜名</th>
                       <th>单价</th>
-                        <th>描述</th>
+                      <th>图片</th>
+                      <th>描述</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for item in order %}
+                    {% for item in menu %}
                     <tr>
-                      <td>{{item.menuId.restaurantId.rName}}</td>
-                      <td>{{item.oId}}</td>
-                      <td>{{item.oTime}}</td>
-                      <td>{{item.userId.uName}}</td>
-                      <td>{{item.menuId.mName}}</td>
-                      <td>{{item.number}}</td>
-                      <td>{{item.money}}</td>
-
+                      <td>{{item.mId}}</td>
+                      <td>{{item.mName}}</td>
+                      <td>{{item.price}}</td>
+                      <td><img height="160" width="240" src="/static/images/{{item.image}}" ></td>
+                      <td>{{item.infor}}</td>
+                      <td>
+                        <button class="btn btn-primary btn-block" name="temp_id" value={{item.mId}}><i class="fa fa-sign-in fa-lg fa-fw"></i>修改</button>
+                        <button class="btn btn-primary btn-block" name="delete"  value={{item.mId}}><i class="fa fa-sign-in fa-lg fa-fw"></i>删除</button>
+                      </td>
                     </tr>
                     {% endfor %}
                   </tbody>
                 </table>
+                </form>
               </div>
             </div>
           </div>
