@@ -19,9 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f2d716a-de86-4ef3-af7b-95a59c885984" name="Default Changelist" comment="解决推荐页面bug，新增activity表">
+    <list default="true" id="1f2d716a-de86-4ef3-af7b-95a59c885984" name="Default Changelist" comment="menu.image新增upload=image">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/reserve.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/reserve.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +87,7 @@
       <workItem from="1596170623742" duration="116000" />
       <workItem from="1596170767402" duration="15683000" />
       <workItem from="1596682907439" duration="2828000" />
-      <workItem from="1596695040701" duration="71000" />
+      <workItem from="1596695040701" duration="11254000" />
     </task>
     <task id="LOCAL-00001" summary="第二次修改">
       <created>1594823448823</created>
@@ -180,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596683713137</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="menu.image新增upload=image">
+      <created>1596695355201</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1596695355202</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,7 +219,8 @@
     <MESSAGE value="version:1.0.7&#10;fix some bugs in audit_restaurant(views.py)&#10;complete the delete_restaurant.html&#10;now multi-restaurant-requests are allowed to show on admin's page,waiting for the admin's check&#10;admin is allowed to delete bad restaurants" />
     <MESSAGE value="新增菜品图片和说明属性，修改数据库用户名和密码，优化用户下单流程" />
     <MESSAGE value="解决推荐页面bug，新增activity表" />
-    <option name="LAST_COMMIT_MESSAGE" value="解决推荐页面bug，新增activity表" />
+    <MESSAGE value="menu.image新增upload=image" />
+    <option name="LAST_COMMIT_MESSAGE" value="menu.image新增upload=image" />
   </component>
   <component name="WindowStateProjectService">
     <state x="660" y="277" key="#Notifications" timestamp="1596009774328">
@@ -229,13 +237,17 @@
     <state x="392" y="7" width="829" height="920" key="CommitChangelistDialog2/0.0.1440.960@0.0.1440.960" timestamp="1594964235501" />
     <state x="588" y="112" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1595414150138" />
     <state x="294" y="40" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1595388080639" />
-    <state x="539" y="205" key="FileChooserDialogImpl" timestamp="1596005098052">
+    <state x="539" y="205" key="FileChooserDialogImpl" timestamp="1596699335545">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="501" y="236" key="FileChooserDialogImpl/0.0.1440.960@0.0.1440.960" timestamp="1588559392922" />
-    <state x="539" y="205" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1596005098052" />
+    <state x="539" y="205" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1596699335545" />
     <state x="668" y="256" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1594821112411" />
     <state x="668" y="266" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1595166229273" />
+    <state x="481" y="117" key="RollbackChangesDialog" timestamp="1596707372546">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state x="481" y="117" key="RollbackChangesDialog/0.0.1549.831@0.0.1549.831" timestamp="1596707372546" />
     <state x="223" y="105" key="SettingsEditor" timestamp="1596009798285">
       <screen x="0" y="0" width="1549" height="831" />
     </state>

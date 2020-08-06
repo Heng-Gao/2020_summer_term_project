@@ -83,15 +83,15 @@
                   </thead>
                   <tbody align="center">
                     {% for item in menu %}
-                    <tr>
+                    <tr class="dish">
                       <td>{{item.mName}}</td>
                       <td class="food_price">{{item.price}}</td>
                       <td width="300">{{item.infor}}</td>
                       <td><img height="160" width="240" src="/static/images/{{item.image}}" %}"></td>
                       <td>
-                        <a href="javascript:" class="sub" >-</a>
-                        <input type="text" class="num" mid="{{item.mId}}" value="0">
-                        <a href="javascript:" class="add">+</a>
+                        <a href="javascript:" class="fa-minus btn btn-primary fa fa-lg" ></a>
+                        <input type="text" style="width: 50px" class="num" mid="{{item.mId}}" value="0">
+                        <a href="javascript:" class="fa-plus btn btn-primary fa fa-lg"></a>
                       </td>
                     </tr>
                     {% endfor %}
@@ -101,61 +101,29 @@
             </div>
           </div>
         </div>
-<!--        <div class="col-md-12">-->
-<!--          <div class="tile">-->
-<!--          <h3 class="tile-tile">老字号店铺</h3>-->
-<!--            <div class="tile-body">-->
-<!--              <div class="table-responsive">-->
-<!--                <table class="table table-hover table-bordered" id="sampleTable2">-->
-<!--                  <thead>-->
-<!--                    <tr>-->
-<!--                      <th>餐馆</th>-->
-<!--                      <th>商家地址</th>-->
-<!--                      <th>联系电话</th>-->
-<!--                    </tr>-->
-<!--                  </thead>-->
-<!--                  <tbody>-->
-<!--                    {% for item in restaurant %}-->
-<!--                    <tr href="">-->
-<!--                      <td>{{item.rName}}</td>-->
-<!--                      <td>{{item.rAddr}}</td>-->
-<!--                      <td>{{item.rTel}}</td>-->
-<!--                    </tr>-->
-<!--                    {% endfor %}-->
-<!--                  </tbody>-->
-<!--                </table>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="col-md-12">-->
-<!--          <div class="tile">-->
-<!--            <h3 class="tile-title">点单</h3>-->
-<!--            <div class="tile-body">-->
-<!--              <form class="row" method="POST">-->
-<!--                <div class="form-group col-md-3">-->
-<!--                  <label class="control-label">菜号</label>-->
-<!--                  <input class="form-control" type="text" placeholder="输入菜号" name="mId">-->
-<!--                </div>-->
-<!--                <div class="form-group col-md-3">-->
-<!--                  <label class="control-label">数量</label>-->
-<!--                  <input class="form-control" type="text" placeholder="输入数量" name="count">-->
-<!--                </div>-->
-
-<!--                <div class="form-group col-md-4 align-self-end">-->
-<!--                  <button class="btn btn-primary"><i class="fa fa-fw fa-lg fa-check-circle"></i>支付 payment</button>-->
-<!--                </div>-->
-<!--                {% if messages %}-->
-<!--                  <script>-->
-<!--                    {% for msg in messages %}-->
-<!--                        alert('{{msg.message}}');-->
-<!--                     {% endfor %}-->
-<!--                  </script>-->
-<!--                {% endif %}-->
-<!--              </form>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <form class="row">
+                <div class="form-group col-md-1">
+                  <label class="control-label"></label>
+                </div>
+                <div class="form-group col-md-7">
+                  <label class="control-label"></label>
+                </div>
+                <div class="form-group col-md-1">
+                  <a style="font-size: 20px">应付￥:</a>
+                </div>
+                <div class="total_amount form-group col-md-1">
+                  <a style="font-size: 20px">0元</a>
+                </div>
+                <div class="form-group col-md-2 align-self-end">
+                  <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>付款</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
     <!-- Essential javascripts for application to work-->
@@ -171,11 +139,35 @@
     <script type="text/javascript" src="{% static "js/plugins/dataTables.bootstrap.min.js" %}"></script>
     <script type="text/javascript">$('#sampleTable1').DataTable();</script>
     <script type="text/javascript">$('#sampleTable2').DataTable();</script>
-<!--    <script type="text/javascript">-->
-<!--      $('.add').click(function () {-->
-<!--        count=$(this).next().val()-->
-<!--      })-->
-<!--    </script>-->
+    <script type="text/javascript">
+      function update_amount(){
+        total_amount=0
+        $('.dish').each(function () {
+          count=$(this).find('.num').val()
+          price=$(this).children('.food_price').text()
+          item_amount=parseInt(count)*parseFloat(price)
+          total_amount+=item_amount
+        })
+        $('total_amount').children('a').val(total_amount.toFixed(2))
+      }
+      $('.fa-minus').click(function () {
+        mid=$(this).next().attr('mid')
+        count=$(this).next().val()
+        price=$(this).parent().parent().children('')
+        count=parseInt(count)-1
+        if(count>=0){
+          $(this).next().val(count)
+        }
+        update_amount()
+      })
+      $('.fa-plus').click(function () {
+        mid=$(this).prev().attr('mid')
+        count=$(this).prev().val()
+        count=parseInt(count)+1
+        $(this).prev().val(count)
+        update_amount()
+      })
+    </script>
     <!-- Google analytics script-->
     <script type="text/javascript">
       if(document.location.hostname == 'pratikborsadiya.in') {
