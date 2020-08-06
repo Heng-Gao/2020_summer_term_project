@@ -32,7 +32,7 @@ class Menu(models.Model):
     mName = models.CharField(max_length=15)
     price = models.IntegerField()
     restaurantId = models.ForeignKey(to="Restaurant", on_delete=models.CASCADE)
-    image = models.ImageField()  # 格式：'p'+mId+照片后缀,同图片文件名,比例统一为3：2
+    image = models.ImageField(upload_to='image')  # 格式：'p'+mId+照片后缀,同图片文件名,比例统一为3：2
     infor = models.CharField(max_length=100)  # 菜品描述，不得多于100字（商户上传菜品时验证）
 
 

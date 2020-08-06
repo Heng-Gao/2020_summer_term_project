@@ -19,16 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f2d716a-de86-4ef3-af7b-95a59c885984" name="Default Changelist" comment="新增菜品图片和说明属性，修改数据库用户名和密码，优化用户下单流程">
-      <change afterPath="$PROJECT_DIR$/Platform/migrations/0011_tmp.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Platform/migrations/0012_auto_20200806_1107.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/2020_summer_term_project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2020_summer_term_project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="1f2d716a-de86-4ef3-af7b-95a59c885984" name="Default Changelist" comment="解决推荐页面bug，新增activity表">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Platform/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/templates/reserve.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/reserve.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +86,8 @@
       <workItem from="1595982655222" duration="23393000" />
       <workItem from="1596170623742" duration="116000" />
       <workItem from="1596170767402" duration="15683000" />
-      <workItem from="1596682907439" duration="603000" />
+      <workItem from="1596682907439" duration="2828000" />
+      <workItem from="1596695040701" duration="71000" />
     </task>
     <task id="LOCAL-00001" summary="第二次修改">
       <created>1594823448823</created>
@@ -179,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596127283693</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="解决推荐页面bug，新增activity表">
+      <created>1596683713137</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1596683713137</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,7 +211,8 @@
     <MESSAGE value="version:1.0.6&#10;add model &quot;temp_restaurant&quot;&#10;almost complete the restaurant_register.html&#10;now multi-restaurant-requests are allowed to show on admin's page,waiting for the admin's check" />
     <MESSAGE value="version:1.0.7&#10;fix some bugs in audit_restaurant(views.py)&#10;complete the delete_restaurant.html&#10;now multi-restaurant-requests are allowed to show on admin's page,waiting for the admin's check&#10;admin is allowed to delete bad restaurants" />
     <MESSAGE value="新增菜品图片和说明属性，修改数据库用户名和密码，优化用户下单流程" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增菜品图片和说明属性，修改数据库用户名和密码，优化用户下单流程" />
+    <MESSAGE value="解决推荐页面bug，新增activity表" />
+    <option name="LAST_COMMIT_MESSAGE" value="解决推荐页面bug，新增activity表" />
   </component>
   <component name="WindowStateProjectService">
     <state x="660" y="277" key="#Notifications" timestamp="1596009774328">
@@ -240,11 +242,11 @@
     <state x="207" y="122" key="SettingsEditor/0.0.1440.960@0.0.1440.960" timestamp="1594734608969" />
     <state x="223" y="105" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1596009798285" />
     <state x="276" y="132" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1595121984560" />
-    <state x="336" y="185" key="Vcs.Push.Dialog.v2" timestamp="1596127304016">
+    <state x="336" y="185" key="Vcs.Push.Dialog.v2" timestamp="1596683836739">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="313" y="214" key="Vcs.Push.Dialog.v2/0.0.1440.960@0.0.1440.960" timestamp="1594964247561" />
-    <state x="336" y="185" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1596127304016" />
+    <state x="336" y="185" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1596683836739" />
     <state x="417" y="232" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1595414162152" />
     <state x="417" y="241" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1595388102355" />
     <state x="547" y="355" width="347" height="253" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1594955780685">
