@@ -148,7 +148,8 @@
           item_amount=parseInt(count)*parseFloat(price)
           total_amount+=item_amount
         })
-        $('total_amount').children('a').val(total_amount.toFixed(2))
+        a=1
+        $('.total_amount').children('a').text(total_amount.toFixed(2))
       }
       $('.fa-minus').click(function () {
         mid=$(this).next().attr('mid')
@@ -166,6 +167,19 @@
         count=parseInt(count)+1
         $(this).prev().val(count)
         update_amount()
+      })
+      $('.num').focus(function () {
+          pre_count=$(this).val()
+      })
+      $('.num').blur(function () {
+          count=$(this).val()
+          if(isNaN(count) || count.trim().length==0 || parseInt(count)<=0){
+              $(this).val(pre_count)
+              return
+          }
+          count=parseInt(count)
+          $(this).val(count)
+          update_amount()
       })
     </script>
     <!-- Google analytics script-->

@@ -19,7 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f2d716a-de86-4ef3-af7b-95a59c885984" name="Default Changelist" comment="menu.image新增upload=image">
+    <list default="true" id="1f2d716a-de86-4ef3-af7b-95a59c885984" name="Default Changelist" comment="调节商品数量">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Platform/templates/reserve.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/reserve.html" afterDir="false" />
     </list>
@@ -87,7 +87,7 @@
       <workItem from="1596170623742" duration="116000" />
       <workItem from="1596170767402" duration="15683000" />
       <workItem from="1596682907439" duration="2828000" />
-      <workItem from="1596695040701" duration="11254000" />
+      <workItem from="1596695040701" duration="14848000" />
     </task>
     <task id="LOCAL-00001" summary="第二次修改">
       <created>1594823448823</created>
@@ -187,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596695355202</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="调节商品数量">
+      <created>1596707811930</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1596707811930</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,17 +227,19 @@
     <MESSAGE value="新增菜品图片和说明属性，修改数据库用户名和密码，优化用户下单流程" />
     <MESSAGE value="解决推荐页面bug，新增activity表" />
     <MESSAGE value="menu.image新增upload=image" />
-    <option name="LAST_COMMIT_MESSAGE" value="menu.image新增upload=image" />
+    <MESSAGE value="调节商品数量" />
+    <option name="LAST_COMMIT_MESSAGE" value="调节商品数量" />
   </component>
   <component name="WindowStateProjectService">
     <state x="660" y="277" key="#Notifications" timestamp="1596009774328">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="660" y="277" key="#Notifications/0.0.1549.831@0.0.1549.831" timestamp="1596009774328" />
-    <state x="176" y="136" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1593269881026">
-      <screen x="0" y="0" width="1440" height="960" />
+    <state x="189" y="118" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1596708464515">
+      <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="176" y="136" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.960@0.0.1440.960" timestamp="1593269881026" />
+    <state x="189" y="118" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1596708464515" />
     <state x="588" y="112" width="829" height="920" key="CommitChangelistDialog2" timestamp="1595414150138">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -278,9 +287,10 @@
     </state>
     <state x="381" y="268" key="git4idea.merge.GitPullDialog/0.0.1440.960@0.0.1440.960" timestamp="1594905191158" />
     <state x="508" y="302" key="git4idea.merge.GitPullDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1595383011125" />
-    <state x="623" y="234" width="672" height="705" key="search.everywhere.popup" timestamp="1595218160965">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="503" y="180" width="672" height="543" key="search.everywhere.popup" timestamp="1596709884823">
+      <screen x="0" y="0" width="1549" height="831" />
     </state>
+    <state x="503" y="180" width="672" height="543" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1596709884823" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1595160422791" />
     <state x="623" y="234" width="672" height="705" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1595218160965" />
   </component>
