@@ -16,6 +16,7 @@ urlpatterns = [
     path('recommand/', views.recommand),
     path('restaurant_entrance/', views.restaurant_entrance),
     path('reserve/', views.reserve),
+    path('checkPay/', views.checkPay),
     path('current/', views.current),
     path('handle_current/', views.handle_current),
     path('logout/', views.logout),

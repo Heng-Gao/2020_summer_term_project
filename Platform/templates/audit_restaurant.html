@@ -75,6 +75,7 @@
                         <th>餐厅地址 Address</th>
                         <th>联系电话 Telephone</th>
                         <th>电子邮件 Email</th>
+                        <th>证件照片 Image</th>
                         <th>是否通过 Check</th>
                         <th>确认提交 Submit</th>
                       </tr>
@@ -86,6 +87,7 @@
                         <td>{{item.t_addr}}</td>
                         <td>{{item.t_tel}}</td>
                         <td>{{item.t_email}}</td>
+                        <td><img height="80" width="120" src="/static/images/{{item.image}}" ></td>
                         <td>
                           <input type="radio" name="check" value="1" checked="checked">是
                           <input type="radio" name="check" value="0">否

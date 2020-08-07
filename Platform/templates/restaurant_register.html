@@ -17,10 +17,12 @@
     </section>
     <section class="register-content">
       <div class="logo">
-        <h1>饥肠辘辘</h1>
+        <center>
+          <h1>饥肠辘辘</h1>
+        </center>
       </div>
       <div class="register-box">
-        <form class="register-form" method="POST">
+        <form class="register-form" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <h3 class="register-head"><i class="fa fa-lg fa-fw fa-user"></i>餐厅注册 REGISTER</h3>
           <div class="form-group">
@@ -32,6 +34,8 @@
             <input class="form-control" type="text" placeholder="Text" name="tel" >
             <label class="control-label">电子邮箱 E-MAIL</label>
             <input class="form-control" type="text" placeholder="Text" name="email" >
+            <label class="control-label">许可证照片 image</label>
+            <input class="form-control" type="file"  name="image" >
           </div>
           <div class="form-group btn-container">
             <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>注册 REGISTER</button>
@@ -59,8 +63,8 @@
     <script src="{% static "js/plugins/pace.min.js" %}"></script>
     <script type="text/javascript">
       // Login Page Flipbox control
-      $('.login-content [data-toggle="flip"]').click(function() {
-      	$('.login-box').toggleClass('flipped');
+      $('.register-content [data-toggle="flip"]').click(function() {
+      	$('.register-box').toggleClass('flipped');
       	return false;
       });
     </script>

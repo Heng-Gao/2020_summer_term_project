@@ -2,6 +2,8 @@
 {% load static %}
 <html lang="en">
   <head>
+    <script src="{% static 'js/echarts.min.js' %}"  charset="utf-8"></script>
+
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <!-- Twitter meta-->
     <meta property="twitter:card" content="summary_large_image">
@@ -90,6 +92,10 @@
                   </tr>
                 </tbody>
               </table>
+              <tr>
+<!--              <div id="chart_1" style="width: 800px;height:300px;"></div>-->
+              <div id="chart_2" style="width: 400px;height:300px;"></div>
+              </tr>
             </div>
           </div>
         </div>
@@ -114,5 +120,68 @@
       	ga('send', 'pageview');
       }
     </script>
+
   </body>
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/echarts/3.0.0/echarts.min.js"></script>
+<!--<script type="text/javascript">-->
+<!--   var myChart = echarts.init(document.getElementById('chart_1'));-->
+<!--option = {-->
+<!--    xAxis: {-->
+<!--        type: 'category',-->
+<!--        boundaryGap: false,-->
+<!--        data: {{name1_list|safe}}-->
+<!--    },-->
+<!--    yAxis: {-->
+<!--        type: 'value'-->
+<!--    },-->
+<!--    series: [{-->
+<!--        data: {{price_list}},-->
+<!--        type: 'line',-->
+<!--        areaStyle: {}-->
+<!--    }]-->
+<!--};-->
+
+<!--   myChart.setOption(option);-->
+<!--</script>-->
+
+<script type="text/javascript">
+   var myChart2 = echarts.init(document.getElementById('chart_2'));
+
+option2 = {
+    title: {
+        text: '用户点餐统计',
+        subtext: '菜品偏好',
+        left: 'center'
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c} ({d}%)'
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: {{name1|safe}}
+    },
+    series: [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '60%'],
+            data:{{result_list|safe}},
+
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+   myChart2.setOption(option2);
+</script>
+
 </html>

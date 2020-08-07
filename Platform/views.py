@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db.models import Count
 from django.forms.models import model_to_dict
 from Platform import models
 from django.db.models import F
 import datetime
+from alipay import AliPay, DCAliPay, ISVAliPay
 
 from numpy import *
 from numpy import linalg as la
@@ -79,9 +81,37 @@ def index_restaurant(request):
     else:
         number = request.session.get('number')
         restaurant = models.Restaurant.objects.filter(rId=number)
+        meun = models.Menu.objects.filter(restaurantId=number)
+        order = models.Order.objects.all()
+        name1 = []
+        name_list = []
+        # name1_list = []
+        # price_list = []
+        result_list = []
+        for item in meun:
+            d = {'value': 0, 'name': item.mName, 'id': item.mId}
+            name1.append(item.mName)
+            name_list.append(d)
+        for item in order:
+            # name1_list.append(item.menuId.mName)
+            # price_list.append(item.money)
+            for name_id in name_list:
+                if item.menuId.mId == name_id['id']:
+                    name_id['value'] = name_id['value'] + 1
+        for name_id in name_list:
+            d = {'value': name_id['value'], 'name': name_id['name']}
+            result_list.append(d)
+        print(result_list)
+
+        result_list1 = [{'value': 10, 'name': '烤全鸡'}, {'value': 4, 'name': '卤鸭架'}, {'value': 4, 'name': '麻辣鸭腿'}
+                        ]
         return render(request, 'index_restaurant.html',
                       context={'id': restaurant[0].rId, 'name': restaurant[0].rName, 'addr': restaurant[0].rAddr,
-                               'tel': restaurant[0].rTel, 'dysy': restaurant[0].dysy})
+                               'tel': restaurant[0].rTel, 'dysy': restaurant[0].dysy,
+                               'name1': name1, 'result_list': result_list,
+                               # 'name1_list': name1_list, 'price_list': price_list,
+                               # 'result_list1': json.dumps(result_list1),
+                               })
 
 
 def index_administrator(request):
@@ -216,6 +246,20 @@ def restaurant_entrance(request):
                                    'restaurant': restaurant})
 
 
+app_private_key_string = open("Platform/keys/my_private_key.pem").read()
+alipay_public_key_string = open("Platform/keys/alipay_public_key.pem").read()
+
+alipay = AliPay(
+    appid="2021000116687928",
+    app_notify_url='http://127.0.0.1:8000/checkPay/',  # 默认回调url
+    app_private_key_string=app_private_key_string,
+    # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
+    alipay_public_key_string=alipay_public_key_string,
+    sign_type="RSA2",  # RSA 或者 RSA2
+    debug=True  # 默认False
+)
+
+
 def reserve(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
@@ -232,14 +276,45 @@ def reserve(request):
             return render(request, 'reserve.html',
                           context={'name': user[0].uName, 'number': number, 'menu': menu, 'rName': rName})
         elif request.method == 'POST':
+            amount = 0
             for i in models.Menu.objects.all():
-                quan=request.POST.get(i.mId)
+                quan = request.POST.get(i.mId)
                 if quan:
-                    quan=int(quan)
-                    if quan>0:
-                        print(i.mId,':',quan)
+                    quan = int(quan)
+                    if quan > 0:
+                        print(i.mId, ':', quan)
+                        amount += i.price * quan
                         # models.Menu.objects.create(oTime=datetime.datetime.now(),number=quan,money=quan*i.price,status='处理中',userId=number,menuId=i.mId)
-            return redirect('/restaurant_entrance/')
+            if amount > 0:
+                import uuid
+                subject = "饥肠辘辘订单支付"
+                # 获取扫码支付请求参数
+                order_string = alipay.api_alipay_trade_page_pay(
+                    out_trade_no=str(uuid.uuid1()),
+                    total_amount=amount,
+                    subject=subject,
+                    return_url='http://127.0.0.1:8000/checkPay/',
+                    notify_url='http://127.0.0.1:8000/checkPay/'
+                )
+                # 获取扫码支付的请求地址
+                url ='https://openapi.alipaydev.com/gateway.do?' + order_string
+                return HttpResponseRedirect(url)
+
+
+def checkPay(request):
+    if not request.session.get('islogin', None):
+        return redirect('/login/')
+    else:
+        number = request.session.get('number')
+        user = models.User.objects.filter(uId=number)
+        print(request)
+        data = request.dict()
+        signature = data.pop("sign")
+        # verification
+        success = alipay.verify(data, signature)
+        if success and data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED"):
+            return HttpResponse('支付成功！')
+        return HttpResponse('支付失败！')
 
 
 def current(request):
@@ -329,7 +404,6 @@ def activities_submit(request):
             new_Activity.save()
 
             models.Menu.objects.filter(restaurantId=restaurant_Id).update(price=F('price') * d / 10)
-            messages.success(request, '新建成功！')
             return redirect('/new_activities/')
 
 
@@ -346,7 +420,6 @@ def edit_menu(request):
             if 'delete' in request.POST:
                 temp_id = request.POST.get('delete')
                 models.Menu.objects.filter(mId=temp_id).first().delete()
-                messages.success(request, '删除成功！')
                 return redirect('/edit_menu/')
             else:
                 temp_id = request.POST.get('temp_id')
@@ -541,6 +614,7 @@ def restaurant_register(request):
         raddr = request.POST.get('addr')
         rtel = request.POST.get('tel')
         remail = request.POST.get('email')
+        image = request.FILES.get('image')
         if rname and raddr and rtel and remail:
             same_name = models.User.objects.filter(uName=rname)
             if same_name:
@@ -552,6 +626,7 @@ def restaurant_register(request):
             new_tmp_res.t_addr = raddr
             new_tmp_res.t_tel = rtel
             new_tmp_res.t_email = remail
+            new_tmp_res.image = image
             new_tmp_res.save()
 
             messages.success(request, '提交成功，管理员将在12小时内审核，请耐心等待！')
