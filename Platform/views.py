@@ -237,7 +237,7 @@ def reserve(request):
                 if quan:
                     quan=int(quan)
                     if quan>0:
-                        print(i.mId,quan)
+                        print(i.mId,':',quan)
                         # models.Menu.objects.create(oTime=datetime.datetime.now(),number=quan,money=quan*i.price,status='处理中',userId=number,menuId=i.mId)
             return redirect('/restaurant_entrance/')
 
