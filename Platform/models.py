@@ -46,7 +46,7 @@ class Order(models.Model):
     userId = models.ForeignKey(to="User", on_delete=models.CASCADE)
     menuId = models.ForeignKey(to="Menu", on_delete=models.CASCADE)
     evaluation = models.CharField(max_length=3, null=True)#评价
-    realId=models.IntegerField()
+    # realId=models.IntegerField()
 
 
 class TmpRestaurant(models.Model):
@@ -66,6 +66,6 @@ class Activity(models.Model):
     restaurantId = models.ForeignKey(to="Restaurant", on_delete=models.CASCADE)
 
 
-class orderId(models.Model):
-    first=models.IntegerField(primary_key=True)
-    id=models.IntegerField(default=1)
+# class orderId(models.Model):
+#     first=models.IntegerField(primary_key=True)
+#     id=models.IntegerField(default=1)

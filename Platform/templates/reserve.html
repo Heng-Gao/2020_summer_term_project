@@ -71,7 +71,9 @@
           <h3 class="tile-tile">菜品一览</h3>
             <div class="tile-body">
               <div class="table-responsive">
-                <table class="table table-hover table-bordered" id="sampleTable1">
+                <form class="postit" method="post" action="/reserve/">
+                  <table class="table table-hover table-bordered" id="sampleTable1">
+<!--            <table class="postit table table-hover table-bordered" id="sampleTable1" method="post" action="/reserve/">-->
                   <thead>
                     <tr>
                       <th>菜名</th>
@@ -90,13 +92,14 @@
                       <td><img height="160" width="240" src="/static/images/{{item.image}}" %}"></td>
                       <td>
                         <a href="javascript:" class="fa-minus btn btn-primary fa fa-lg" ></a>
-                        <input type="text" style="width: 50px" class="num" mid="{{item.mId}}" value="0">
+                        <input name="{{item.mId}}" type="text" style="width: 50px" class="num" mid="{{item.mId}}" value="0">
                         <a href="javascript:" class="fa-plus btn btn-primary fa fa-lg"></a>
                       </td>
                     </tr>
                     {% endfor %}
                   </tbody>
                 </table>
+                </form>
               </div>
             </div>
           </div>
@@ -118,7 +121,7 @@
                   <a style="font-size: 20px">0</a>
                 </div>
                 <div class="form-group col-md-2 align-self-end">
-                  <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>付款</button>
+                  <a href="javascript:" class="paybtn btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>付款</a>
                 </div>
               </form>
             </div>
@@ -148,7 +151,6 @@
           item_amount=parseInt(count)*parseFloat(price)
           total_amount+=item_amount
         })
-        a=1
         $('.total_amount').children('a').text(total_amount.toFixed(2))
       }
       $('.fa-minus').click(function () {
@@ -167,6 +169,10 @@
         count=parseInt(count)+1
         $(this).prev().val(count)
         update_amount()
+      })
+      $('.paybtn').click(function () {
+        $('.postit').submit();
+        // $('.postit').post('/reserve/','1')
       })
       $('.num').focus(function () {
           pre_count=$(this).val()

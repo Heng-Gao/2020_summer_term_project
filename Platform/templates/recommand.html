@@ -66,8 +66,20 @@
         </ul>
       </div>
       <div class="row">
-        <div class="col-md-12">
-          <div class="tile">
+         <div style="display:flex; justify-content: flex-end">
+          <div class="tile" style="width:740px;display:flex; justify-content: center">
+            <div id="scrollPics">
+              <ul class="slider">
+                  <li><img src="../images/gg001.jpg" alt=""></li>
+                  <li><img src="../images/gg002.jpg" alt=""></li>
+                  <li><img src="../images/gg003.jpg" alt=""></li>
+                  <li><img src="../images/p001.jpg" alt=""></li>
+              </ul>
+              <ul class="num"></ul>
+           </div>
+          </div>
+        </div>
+          <div class="tile" style="width:40%">
           <h3 class="tile-tile">根据历史推荐</h3>
             <div class="tile-body">
               <div class="table-responsive">
@@ -94,7 +106,7 @@
               </div>
             </div>
           </div>
-        </div>
+<!--        </div>-->
         <div class="col-md-12">
           <div class="tile">
           <h3 class="tile-tile">猜你喜欢</h3>
@@ -177,6 +189,106 @@
       	ga('create', 'UA-72504830-1', 'auto');
       	ga('send', 'pageview');
       }
-    </script>
+    <!--轮播图-->
+     $(function () {
+         var slider =$("#scrollPics .slider");
+         //获取图片
+         var imgCon =$("#scrollPics .slider li");
+         //除第一张其余的图片全部隐藏
+         imgCon.not(imgCon.eq(0)).hide();
+         //定义页码
+         var num =$("#scrollPics .num")
+         //获取li标签的长度
+         //find()方法返回备选元素的后代元素
+         var len =slider.find("li").length;
+         var html_page ="";
+         index=0;
+         //添加页码
+         for (var i=0;i<len;i++){
+             if (i===0){
+                 html_page+="<li class='active'>"+(i+1)+"</li>"
+             }
+             else {
+                 html_page +="<li>"+(i+1)+"</li>"
+             }
+         }
+         //输出原点
+         num.html(html_page)
+         //显示索引对应的图片
+         function showPic(index) {
+             imgCon.eq(index).show().siblings("li").hide();
+             num.find("li").eq(index).addClass("active").siblings("li").removeClass("active")
+         }
+         //原点点击事件
+         $(".num li").click(function () {
+             index=$(this).index()
+             showPic(index)
+         })
+         //图片轮播
+         $("#scrollPics").hover(function () {
+             clearInterval(window.timer)
+         },function () {
+             window.timer =setInterval(function () {
+                 showPic(index);
+                 index++;
+                 if (index ===len){
+                     index =0
+                 }
+             },2000)
+         }).trigger("mouseleave")//触发备选元素的指定事件
+     })
+ </script>
   </body>
+  <style>
+     ul{
+          list-style: none;
+         }
+         #scrollPics{
+             height: 420px;
+             width: 790px;
+             margin-bottom: 10px;
+             overflow: hidden;
+             position: relative;
+             display:felx;
+             justify-content: center;
+         }
+         .slider{
+
+         }
+         .slider img{
+         width: 100%;
+         }
+         .num{
+         position: absolute;
+         right: 5px;
+         bottom: 5px;
+         }
+         .num li{
+         float: left;
+         color: #ff7300;
+         text-align: center;
+         line-height: 16px;
+         width: 16px;
+         height: 16px;
+         cursor: pointer;
+         overflow: hidden;
+         margin: 3px 1px;
+         border: 1px solid #ff7300;
+         background-color: white;
+         border-radius: 50%;
+         }
+         .num li.active{
+         color: #fff;
+         line-height: 21px;
+         width: 21px;
+         height: 21px;
+         font-size: 16px;
+         margin: 0 1px;
+         border: 0;
+         background-color: #ff7300;
+         font-weight: bold;
+         border-radius: 50%;
+         cursor: pointer;
+         }
+  </style>
 </html>

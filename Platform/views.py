@@ -210,7 +210,6 @@ def restaurant_entrance(request):
         user = models.User.objects.filter(uId=number)
         menu = models.Menu.objects.all()
         restaurant = models.Restaurant.objects.all()
-
         if request.method == 'GET':
             return render(request, 'restaurant_entrance.html',
                           context={'name': user[0].uName, 'number': number, 'menu': menu,
@@ -232,6 +231,15 @@ def reserve(request):
             menu = models.Menu.objects.filter(restaurantId=rId)
             return render(request, 'reserve.html',
                           context={'name': user[0].uName, 'number': number, 'menu': menu, 'rName': rName})
+        elif request.method == 'POST':
+            for i in models.Menu.objects.all():
+                quan=request.POST.get(i.mId)
+                if quan:
+                    quan=int(quan)
+                    if quan>0:
+                        print(i.mId,quan)
+                        # models.Menu.objects.create(oTime=datetime.datetime.now(),number=quan,money=quan*i.price,status='处理中',userId=number,menuId=i.mId)
+            return redirect('/restaurant_entrance/')
 
 
 def current(request):
