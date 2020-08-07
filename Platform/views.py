@@ -308,7 +308,7 @@ def checkPay(request):
         number = request.session.get('number')
         user = models.User.objects.filter(uId=number)
         print(request)
-        data = request.dict()
+        data = request.dict()#出错
         signature = data.pop("sign")
         # verification
         success = alipay.verify(data, signature)
