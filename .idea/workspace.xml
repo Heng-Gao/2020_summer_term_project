@@ -19,9 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f2d716a-de86-4ef3-af7b-95a59c885984" name="Default Changelist" comment="删除orderid，menu删除属性realId">
+    <list default="true" id="1f2d716a-de86-4ef3-af7b-95a59c885984" name="Default Changelist" comment="接入支付宝接口，但返回数据处理仍有错误">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596822586950</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="接入支付宝接口，但返回数据处理仍有错误">
+      <created>1596822692947</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1596822692947</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,7 +269,8 @@
     <MESSAGE value="res表新增属性，新增表orderid，menu新增属性realId" />
     <MESSAGE value="res表新增属性，删除orderid，menu删除属性realId" />
     <MESSAGE value="删除orderid，menu删除属性realId" />
-    <option name="LAST_COMMIT_MESSAGE" value="删除orderid，menu删除属性realId" />
+    <MESSAGE value="接入支付宝接口，但返回数据处理仍有错误" />
+    <option name="LAST_COMMIT_MESSAGE" value="接入支付宝接口，但返回数据处理仍有错误" />
   </component>
   <component name="WindowStateProjectService">
     <state x="660" y="277" key="#Notifications" timestamp="1596009774328">
