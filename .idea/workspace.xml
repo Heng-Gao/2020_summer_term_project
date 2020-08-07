@@ -20,19 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f2d716a-de86-4ef3-af7b-95a59c885984" name="Default Changelist" comment="调节商品数量">
-      <change afterPath="$PROJECT_DIR$/Platform/templates/activities_submit.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Platform/templates/menu_add.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Platform/templates/menu_submit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Platform/migrations/0014_restaurant_image.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Platform/migrations/0015_auto_20200807_0943.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/templates/edit_menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/edit_menu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/templates/new_activities.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/new_activities.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/templates/restaurant_history.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/restaurant_history.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platform/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Platform/templates/reserve.html" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/templates/reserve.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Platform/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Platform/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/summer_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/summer_project/settings.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,18 +70,6 @@
       <recent name="H:\大三夏\gitproject\2020_summer_term_project\Platform\templates" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -115,6 +98,7 @@
       <workItem from="1596170767402" duration="15683000" />
       <workItem from="1596682907439" duration="2828000" />
       <workItem from="1596695040701" duration="14848000" />
+      <workItem from="1596763712557" duration="2049000" />
     </task>
     <task id="LOCAL-00001" summary="第二次修改">
       <created>1594823448823</created>
@@ -235,13 +219,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

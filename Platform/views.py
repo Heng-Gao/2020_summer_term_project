@@ -320,7 +320,7 @@ def activities_submit(request):
             new_Activity.restaurantId = restaurant[0]
             new_Activity.save()
 
-            models.Menu.objects.filter(restaurantId=restaurant_Id).update(price=F('price')*d/10)
+            models.Menu.objects.filter(restaurantId=restaurant_Id).update(price=F('price') * d / 10)
             messages.success(request, '新建成功！')
             return redirect('/new_activities/')
 
@@ -343,7 +343,7 @@ def edit_menu(request):
             else:
                 temp_id = request.POST.get('temp_id')
                 temp = models.Menu.objects.filter(mId=temp_id)
-                return redirect('/menu_submit/?temp_id='+temp_id)
+                return redirect('/menu_submit/?temp_id=' + temp_id)
 
 
 def menu_submit(request):
@@ -406,7 +406,6 @@ def menu_add(request):
             new_Menu.image = image
             new_Menu.infor = infor
             new_Menu.save()
-
 
             return redirect('/edit_menu/')
 

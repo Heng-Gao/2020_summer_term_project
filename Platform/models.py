@@ -17,6 +17,7 @@ class Restaurant(models.Model):
     rTel = models.CharField(max_length=15)
     rEmail = models.EmailField()
     dysy = models.IntegerField(default=0)  # 月营业额
+    image = models.ImageField(upload_to='image')
 
 
 class Administrator(models.Model):
@@ -44,7 +45,8 @@ class Order(models.Model):
     status = models.CharField(max_length=10, blank=True)
     userId = models.ForeignKey(to="User", on_delete=models.CASCADE)
     menuId = models.ForeignKey(to="Menu", on_delete=models.CASCADE)
-    evaluation = models.CharField(max_length=3, null=True)
+    evaluation = models.CharField(max_length=3, null=True)#评价
+    realId=models.IntegerField()
 
 
 class TmpRestaurant(models.Model):
@@ -62,3 +64,8 @@ class Activity(models.Model):
     end = models.CharField(max_length=15)
     discount = models.IntegerField()
     restaurantId = models.ForeignKey(to="Restaurant", on_delete=models.CASCADE)
+
+
+class orderId(models.Model):
+    first=models.IntegerField(primary_key=True)
+    id=models.IntegerField(default=1)
