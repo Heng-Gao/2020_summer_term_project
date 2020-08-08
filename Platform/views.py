@@ -277,14 +277,14 @@ def reserve(request):
                           context={'name': user[0].uName, 'number': number, 'menu': menu, 'rName': rName})
         elif request.method == 'POST':
             amount = 0
+            alipay.orderlist = {}
             for i in models.Menu.objects.all():
                 quan = request.POST.get(i.mId)
                 if quan:
                     quan = int(quan)
                     if quan > 0:
-                        print(i.mId, ':', quan)
+                        alipay.orderlist[i.mId] = quan
                         amount += i.price * quan
-                        # models.Menu.objects.create(oTime=datetime.datetime.now(),number=quan,money=quan*i.price,status='处理中',userId=number,menuId=i.mId)
             if amount > 0:
                 import uuid
                 subject = "饥肠辘辘订单支付"
@@ -297,7 +297,7 @@ def reserve(request):
                     notify_url='http://127.0.0.1:8000/checkPay/'
                 )
                 # 获取扫码支付的请求地址
-                url ='https://openapi.alipaydev.com/gateway.do?' + order_string
+                url = 'https://openapi.alipaydev.com/gateway.do?' + order_string
                 return HttpResponseRedirect(url)
 
 
@@ -305,16 +305,32 @@ def checkPay(request):
     if not request.session.get('islogin', None):
         return redirect('/login/')
     else:
+        a = dict()
+        a.keys()
         number = request.session.get('number')
+        print('number:', number)
         user = models.User.objects.filter(uId=number)
-        print(request)
-        data = request.dict()#出错
-        signature = data.pop("sign")
-        # verification
-        success = alipay.verify(data, signature)
-        if success and data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED"):
-            return HttpResponse('支付成功！')
-        return HttpResponse('支付失败！')
+        data = request.GET.dict()
+        response = alipay.api_alipay_trade_query(out_trade_no=data['out_trade_no'])
+        code = response.get('code')
+        if code == '10000' and response.get('trade_status') == 'TRADE_SUCCESS':
+            for i in models.Menu.objects.all():
+                if i.mId in alipay.orderlist.keys():
+                    models.Order.objects.create(oTime=datetime.datetime.now(), number=alipay.orderlist[i.mId],
+                                                money=alipay.orderlist[i.mId] * i.price, status='处理中',
+                                                userId=user[0], menuId=i)
+            return redirect('/current/')
+        return redirect('/current/')
+        # signature = data.pop("sign")
+        # print(data)
+        # print(signature)
+        # # verification
+        # success = alipay.verify(data, signature)
+        # print(success)
+        # # if success and data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED"):
+        # if success:
+        #     return HttpResponse('支付成功！')
+        # return HttpResponse('支付失败！')
 
 
 def current(request):
@@ -323,8 +339,7 @@ def current(request):
     else:
         number = request.session.get('number')
         user = models.User.objects.filter(uId=number)
-        order = models.Order.objects.filter(status='处理中')
-
+        order = models.Order.objects.filter(status='处理中').filter(userId=number)
         if request.method == 'GET':
             return render(request, 'current.html', context={'name': user[0].uName, 'number': number,
                                                             'order': order})
